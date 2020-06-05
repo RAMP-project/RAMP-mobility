@@ -1,0 +1,11 @@
+name: ramp mobility
+
+dependencies:
+  - python=3.7
+  - numpy>=1.10
+  - matplotlib>=1.5.1
+  - pandas>= 0.24.0
+  - convertdate
+  - math
+  - random
+
