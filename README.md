@@ -1,4 +1,4 @@
-*RAMP-mobility: An open-source bottom-up stochastic model for generating electric load profiles.*
+*RAMP-mobility: An open-source bottom-up stochastic model for generating electric vehicles load profiles.*
 
 ---
 
