@@ -1,16 +1,17 @@
 # -*- coding: utf-8 -*-
 """
-Created on Fri Apr 19 14:35:00 2019
+Created on Mon Feb 3 09:30:00 2020
 This is the code for the open-source stochastic model for the generation of 
-multi-energy load profiles in off-grid areas, called RAMP, v.0.2.1-pre.
+electric vehicles load profiles in Europe, called RAMP-mobility.
 
 @authors:
+- Andrea Mangipinto, Politecnico di Milano
 - Francesco Lombardi, Politecnico di Milano
-- Sergio Balderrama, Université de Liège
+- Francesco Sanvito, Politecnico di Milano
 - Sylvain Quoilin, KU Leuven
 - Emanuela Colombo, Politecnico di Milano
 
-Copyright 2019 RAMP, contributors listed above.
+Copyright 2020 RAMP, contributors listed above.
 Licensed under the European Union Public Licence (EUPL), Version 1.1;
 you may not use this file except in compliance with the License.
 
