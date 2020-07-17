@@ -22,7 +22,6 @@ git clone https://github.com/RAMP-project/RAMP-mobility.git
 cd RAMP-mobility
 conda env create  # Automatically creates environment based on environment.yml
 conda activate ramp-mobility # Activate the environment
-pip install -e . # Install editable local version
 ```
 [TO DO: SET DEFAULT INPUT FILES]
 

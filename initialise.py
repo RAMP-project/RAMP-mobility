@@ -9,8 +9,6 @@ import calendar
 import pytz
 
 # Import holidays package including Latvia and Romania (edited version)
-import sys,os
-sys.path.append(os.path.abspath(r'python-holidays'))
 import holidays 
 
 #%% Initialise model
