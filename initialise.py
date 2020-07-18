@@ -8,7 +8,7 @@ import datetime
 import calendar
 import pytz
 
-# Import holidays package including Latvia and Romania (edited version)
+# Import holidays package 
 import holidays 
 
 #%% Initialise model

@@ -70,6 +70,7 @@ def Profile_cloud_plot(stoch_profiles,stoch_profiles_avg):
         plt.plot(np.arange(1440),n,'#b0c4de')
         plt.xlabel('Time [h])')
         plt.ylabel('Power [W]')
+        plt.title('Cloud plot')
         plt.ylim(ymin=0)
         #plt.ylim(ymax=5000)
         plt.margins(x=0)

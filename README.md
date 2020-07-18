@@ -5,15 +5,14 @@
 ## Overview
 RAMP-mobility is a new version of the RAMP model for the generation of European electric vehicles mobility and charging profiles.
 
-[TO DO: IMPROVE RELEASE STATUS AND REFER TO THESIS FOR FULL DOCUMENTATION.]
+The source-code is currently released as v.0.1-pre. This should be regarded as a pre-release: it is not yet accompained by a detailed documentation, but the Python code is fully commented in each line to allow a complete understanding of it. 
+Further details about the conceptual and mathematical model formulation can be found in the RAMP Journal publication (https://doi.org/10.1016/j.energy.2019.04.097). 
 
-The source-code is currently released as v.0.2.1-pre. This should be regarded as a pre-release: it is not yeat accompained by a detailed documentation, but the Python code is fully commented in each line to allow a complete understanding of it. Further details about the conceptual and mathematical model formulation are provided in the related Journal publication (https://doi.org/10.1016/j.energy.2019.04.097). 
+Please consider that a Journal publication dedicated only to RAMP-Mobility is under development. 
 
-Please consider that a newer, fully commented and more user friendly version is under development and should be released soon.
+Also, a newer, fully commented and more user friendly version is under development and should be released soon.
 
 ## Quick start
-
-[TO DO: CHECK THAT THE ENVIRONMENT CREATION WORKS]
 
 If you want to download the latest version from github for use or development purposes, make sure that you have git and the [anaconda distribution](https://www.anaconda.com/distribution/) installed and type the following:
 
@@ -25,7 +24,8 @@ conda activate ramp-mobility # Activate the environment
 ```
 [TO DO: SET DEFAULT INPUT FILES]
 
-To get started, simply run the "RAMP_run.py" script. The console will ask how many profiles (i.e. independent days) need to be simulated, and will provide the results based on the default inputs defined in "input_file_1.py" and "input_file_2". To change the inputs, just modify the latter files. Some guidance about the meaning of each input parameter is available in the "core.py" file, where the *User* and *Appliance* Python classes are defined and fully commented. 
+To get started, simply run the "RAMP_run.py" script. The console will ask how many profiles (i.e. independent days) need to be simulated, and will provide the results for Italy, based on the default inputs defined in "IT.py". To change country, just select another country from the ones available in the "Input files/Europe" folder. 
+Some guidance about the meaning of each input parameter is available in the "core.py" file, where the *User* and *Appliance* Python classes are defined and fully commented. 
 
 ## Authors
 The model has been developed by:
