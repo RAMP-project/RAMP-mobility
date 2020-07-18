@@ -183,7 +183,7 @@ def Profile_dataframe(Profiles_series, year):
    
     return Profiles_df
 
-def Charging_Profile_dataframe(Profiles_series, year):
+def Ch_Profile_df(Profiles_series, year):
     
     minutes = pd.date_range(start=str(year) + '-01-01', periods = len(Profiles_series), freq='T')
     
@@ -342,6 +342,25 @@ def Availability_factors(en_system, User_list, security_margin = 0.5):
     
     return AF
 
+
+# Function to calculate the Availability factors, only with the "Perfect Foresight" charging strategy
+#     if af_calculation: 
+#         AF = pp.Availability_factors(en_sys_tot, User_list, security_margin = 0.5)
+# #            del en_sys_tot
+
+#         # Create AF dataframe
+#         AF_df = pp.AF_dataframe(AF, year) 
+# #            del AF
+        
+#         AF_df_utc = pp.Time_correction(AF_df, country, year) 
+# #            del AF_df
+
+#         pp.export_csv('Availability Factors', AF_df_utc, inputfile, simulation_name)
+
+# ax = pp.Charging_Profile_df_plot(AF_df, start = '01-01 00:00:00', end = '12-31 23:59:00', year = year, country = country)
+# ax.set_title('AF - Perfect Foresight charging mode')
+# ax.set_ylabel('')
+
 #%% Export individual profiles
 '''
 for i in range (len(Profile)):
@@ -375,9 +394,3 @@ def export_pickle(filename, variable, inputfile, simulation_name):
     pickle.dump(variable, file, protocol=4)
     file.close()
     
- 
-# Read pkl Variable 
-# file = open(r"C:\Users\Andrea\OneDrive - Politecnico di Milano\Università\Tesi (OneDrive)\Article PROres1 coupling\Simulations and results\TIMES_ProRes_2050_EVFLEX_new\EVFLEX_new.pkl", 'rb')
-# inputs_EV = pickle.load(file)
-# results_EV = pickle.load(file)
-# file.close()

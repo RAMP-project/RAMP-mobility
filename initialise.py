@@ -44,8 +44,14 @@ def yearly_pattern(country, year):
             Year_behaviour[dict_year[d][1]:year_len:7] = 2
     
     # Adding Vacation days to the Yearly pattern
-            
-    if country == 'EL': 
+    
+    if country == 'RO': 
+        print("[WARNING] Due to a known issue, the automatically installed version of the holidays package is not the latest one containing Romania. Please refer to https://github.com/dr-prodigy/python-holidays/issues/338 for an explanation on how to install holidays' latest version. For the time being holidays from Bulgaria will be used.")
+        country = 'BG'
+    elif country == 'LV':
+        print("[WARNING] Due to a known issue, the automatically installed version of the holidays package is not the latest one containing Latvia. Please refer to https://github.com/dr-prodigy/python-holidays/issues/338 for an explanation on how to install holidays' latest version. For the time being holidays from Lithuania will be used.")
+        country = 'LT'
+    elif country == 'EL': 
         country = 'GR'
     elif country == 'FR':
         country = 'FRA'
@@ -70,13 +76,18 @@ def user_defined_inputs(inputfile):
     User_list = getattr((importlib.import_module(f'Input_files.{inputfile_module}')), 'User_list')
     return(User_list)
 
-def Initialise_model(dummy_days):
+def Initialise_model(dummy_days, full_year, year):
     '''
     The model is ready to be initialised
     '''
     # Simulating n days before and after the wished number of profiles
-    num_profiles_user = int(input("Please indicate the number of profiles to be generated: ")) #asks the user how many profiles (i.e. code runs) he wants
-#    num_profiles_user = 366  # In case several countries shall be simulated in a loop, for a fixed number of days 
+    if full_year: 
+        if calendar.isleap(year): # In case several countries shall be simulated in a loop, use fixed number of days 
+            num_profiles_user = 366 # leap full year
+        else:
+            num_profiles_user = 365  # normal full year
+    else:
+        num_profiles_user = int(input("Please indicate the number of profiles to be generated: ")) #asks the user how many profiles (i.e. code runs) he wants
 
     num_profiles_sim = num_profiles_user + (2 * dummy_days)
     
@@ -91,12 +102,12 @@ def Initialise_model(dummy_days):
 
     return (Profile, Usage, Profile_user, Usage_user, num_profiles_user, num_profiles_sim)
     
-def Initialise_inputs(inputfile, country, year):
+def Initialise_inputs(inputfile, country, year, full_year):
     
     Year_behaviour, dummy_days = yearly_pattern(country, year)
     User_list = user_defined_inputs(inputfile)
     (Profile, Usage, Profile_user, Usage_user, num_profiles_user,num_profiles_sim
-     ) = Initialise_model(dummy_days)
+     ) = Initialise_model(dummy_days, full_year, year)
     
     if calendar.isleap(year) and num_profiles_user == 365:
         print('[WARNING] A leap year is being simulated with 365 days, if you want to simulate the whole year please insert 366 as profiles number') 

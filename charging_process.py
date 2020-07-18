@@ -50,6 +50,11 @@ def Charging_Process(Profiles_user, User_list, country, year, dummy_days, residu
     charging_mode_types = ['Uncontrolled', 'Night Charge', 'Self-consumption', 'RES Integration', 'Perfect Foresight']
     assert charging_mode in charging_mode_types, f"[WARNING] Invalid Charging Mode. Expected one of: {charging_mode_types}"
     
+    #
+    if 'RES Integration' in charging_mode:
+        if residual_load == 0:
+            raise ValueError("[WARNING] RES Integration detected as charging strategy, but the residual load file is not found. Please provide a csv file containing the residual load curve.")                        
+    
     # Check that the initial SOC is in the expected way
     if (SOC_initial != 'random' and 
         not isinstance(SOC_initial, (int, float))): 
@@ -269,9 +274,10 @@ def Charging_Process(Profiles_user, User_list, country, year, dummy_days, residu
 #            plug_in_f = plug_in[dummy_minutes:-dummy_minutes]
 #            plug_in_user[Us.user_name].append(plug_in_f)
 
-            if charging_mode == 'Perfect Foresight':
-                en_system = (Battery_cap_Us_min - charging_power) * plug_in
-                en_sys_tot = en_sys_tot + en_system
+            ### Calculate the part of battery capacity available to the TSO for V2G option (deativated)
+            # if charging_mode == 'Perfect Foresight':
+            #     en_system = (Battery_cap_Us_min - charging_power) * plug_in
+            #     en_sys_tot = en_sys_tot + en_system
 
             if all(SOC > 0): #Check that the car never has SOC < 0
                 continue
@@ -292,8 +298,7 @@ def Charging_Process(Profiles_user, User_list, country, year, dummy_days, residu
         print(f'Charging Profile of "{Us.user_name}" user completed ({num_us}/{tot_users})') #screen update about progress of computation
     
     Charging_profile = Charging_profile[dummy_minutes:-dummy_minutes]
-    en_sys_tot = en_sys_tot[dummy_minutes:-dummy_minutes]
-
+    # en_sys_tot = en_sys_tot[dummy_minutes:-dummy_minutes]
     
-    return (Charging_profile_user, Charging_profile, SOC_user, plug_in_user, en_sys_tot)
+    return (Charging_profile, Charging_profile_user, SOC_user)
 
