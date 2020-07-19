@@ -12,9 +12,31 @@ Please consider that a Journal publication dedicated only to RAMP-Mobility is un
 
 Also, a newer, fully commented and more user friendly version is under development and should be released soon.
 
+## European EV load profiles database
+
+The electric vehicles load profiles resulting from the model are available in the "results/Charging profiles Database" folder. It contains two files:
+
+* Mobility_profiles: power requested to the battery for mobility purposes.
+* Charging_profiles: power requested to the grid to charge the battery.
+ 
+It includes 28 European countries: EU27 minus Cyprus and Malta, plus Norway, Switzerland and the UK.
+
+Four charging strategies are currently implemented to simulate different scenarios. 
+
+1. *Uncontrolled*: The base case, where no control over the user behaviour is applied. If the charging point is available, the battery is charged immediately at the nominal power, until a user-defined value of SOC<sub>max</sub>.
+2. *Perfect Foresight*: Strategy aiming at quantifying the possibility to implement a Vehicle-to-grid solution. If the CP is available, the car is charged right before the end of the parking, at the nominal power, until the SOC satisfies the needs of the following
+journey. This allows to compute the part of EV battery available to the system, without affecting the user driving range. 
+3. *Night Charge*: First smart charging strategy. It aims at shifting the charging events to the night period. The car is charged only if the charging point is available and the parking happens during nighttime.
+4. *RES Integration*: Second smart charging method. Has the goal of coupling the RES power generation with the transport sector. The car is charged only if the charging point is available and the parking happens during periods when there is excess of RES power production. As this condition is evaluated through the residual load curve, a file containing it should be provided in the folder "Input_data/Residual Load duration curve".
+
+Only the results of the *Perfect Foresight* strategy are currently uploaded. 
+Please consider that the results of the three other strategies will be uploaded soon. 
+
+If you would like to create your own scenario, please refer to the **Quick start** tab to start using the model and adapt the several customizable parameters to your own needs. 
+
 ## Quick start
 
-If you want to download the latest version from github for use or development purposes, make sure that you have git and the [anaconda distribution](https://www.anaconda.com/distribution/) installed and type the following:
+To get started, make sure that you have git and the [anaconda distribution](https://www.anaconda.com/distribution/) installed and type the following in the Anaconda Prompt:
 
 ```bash
 git clone https://github.com/RAMP-project/RAMP-mobility.git
@@ -22,9 +44,8 @@ cd RAMP-mobility
 conda env create  # Automatically creates environment based on environment.yml
 conda activate ramp-mobility # Activate the environment
 ```
-[TO DO: SET DEFAULT INPUT FILES]
 
-To get started, simply run the "RAMP_run.py" script. The console will ask how many profiles (i.e. independent days) need to be simulated, and will provide the results for Italy, based on the default inputs defined in "IT.py". To change country, just select another country from the ones available in the "Input files/Europe" folder. 
+Then, simply run the "RAMP_run.py" script. The console will ask how many profiles (i.e. independent days) need to be simulated, and will provide the results for Italy, based on the default inputs defined in "IT.py". To change country, just select another country from the ones available in the "Input files/Europe" folder. 
 Some guidance about the meaning of each input parameter is available in the "core.py" file, where the *User* and *Appliance* Python classes are defined and fully commented. 
 
 ## Authors
