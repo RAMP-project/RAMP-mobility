@@ -80,7 +80,7 @@ Politecnico di Milano, Italy <br/>
 Please cite the original Journal publication if you use RAMP in your research:
 *F. Lombardi, S. Balderrama, S. Quoilin, E. Colombo, Generating high-resolution multi-energy load profiles for remote areas with an open-source stochastic model, Energy, 2019, https://doi.org/10.1016/j.energy.2019.04.097.*
 
-Or the master thesis where this project was developed:
+Or the master thesis where RAMP-Mobility was developed:
 *A. Mangipinto, Development of electric vehicles load profiles for sector coupling in European energy system models, Master Thesis, Politecnico di Milano, 2020*
 
 ## Contribute
