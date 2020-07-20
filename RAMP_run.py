@@ -49,11 +49,11 @@ write_variables = False # Choose to write variables to csv
 # Define folder where results are saved, it will be:
 # "results/inputfile/simulation_name" leave simulation_name False (or "")
 # to avoid the creation of the additional folder
-inputfile = 'Europe/LV'
+inputfile = 'Europe/RO'
 simulation_name = ''
 
 # Define country and year to be considered when generating profiles
-country = 'LV'
+country = 'RO'
 year = 2016
 
 # Choose if simulating the whole year (True) or not (False)

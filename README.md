@@ -7,11 +7,15 @@
 ## Overview
 RAMP-mobility is a new version of the RAMP model for the generation of European electric vehicles mobility and charging profiles.
 
+This repository contains: 
+
+1. The complete RAMP-Mobility model. 
+2. A database containing the results of the model under certain assumptions, ready to be used. 
+
 The source-code is currently released as v.0.1-pre. This should be regarded as a pre-release: it is not yet accompained by a detailed documentation, but the Python code is fully commented in each line to allow a complete understanding of it. 
 Further details about the conceptual and mathematical model formulation can be found in the RAMP Journal publication (https://doi.org/10.1016/j.energy.2019.04.097). 
 
 Please consider that a Journal publication dedicated only to RAMP-Mobility is under development. 
-
 Also, a newer, fully commented and more user friendly version is under development and should be released soon.
 
 ## European EV load profiles database
@@ -27,10 +31,10 @@ The charging profiles are differentiated by the charging strategy.
 Four charging strategies are implemented, to simulate different scenarios. 
 
 1. *Uncontrolled*: The base case, where no control over the user behaviour is applied. If the charging point is available, the battery is charged immediately at the nominal power, until a user-defined value of SOC<sub>max</sub>.
-2. *Perfect Foresight*: Strategy aiming at quantifying the possibility to implement a Vehicle-to-grid solution. If the CP is available, the car is charged right before the end of the parking, at the nominal power, until the SOC satisfies the needs of the following
-journey. This allows to compute the part of EV battery available to the system, without affecting the user driving range. 
+2. *Perfect Foresight*: Strategy aiming at quantifying the possibility to implement a Vehicle-to-grid solution. If the charging point is available, the car is charged right before the end of the parking, at the nominal power, until the SOC satisfies the needs of the following
+journey. This allows to compute the part of the vehicle's battery available to the system, without affecting the user driving range. 
 3. *Night Charge*: First smart charging strategy. It aims at shifting the charging events to the night period. The car is charged only if the charging point is available and the parking happens during nighttime.
-4. *RES Integration*: Second smart charging method. Has the goal of coupling the RES power generation with the transport sector. The car is charged only if the charging point is available and the parking happens during periods when there is excess of RES power production. As this condition is evaluated through the residual load curve, a file containing it should be provided in the folder "Input_data/Residual Load duration curve".
+4. *RES Integration*: Second smart charging method. Has the goal of coupling the renewable power generation with the transport sector. The car is charged only if the charging point is available and the parking happens during periods when there is excess of renewable power production. As this condition is evaluated through the residual load curve, a file containing it should be provided in the folder "Input_data/Residual Load duration curve".
 
 Only the results of the *Perfect Foresight* strategy are currently uploaded. 
 Please consider that the results of the three other strategies will be uploaded soon. 
@@ -72,18 +76,18 @@ KU Leuven, Belgium <br/>
 Politecnico di Milano, Italy <br/>
 
 ## Citing
-[TO DO: Insert thesis as starting reference. Then when available the paper.]
 
 Please cite the original Journal publication if you use RAMP in your research:
 *F. Lombardi, S. Balderrama, S. Quoilin, E. Colombo, Generating high-resolution multi-energy load profiles for remote areas with an open-source stochastic model, Energy, 2019, https://doi.org/10.1016/j.energy.2019.04.097.*
+
+*A. Mangipinto, S. Balderrama, S. Quoilin, E. Colombo, Development of electric vehicles load profiles for sector coupling in European energy system models, Master Thesis, Politecnico di Milano, 2020*
 
 ## Contribute
 This project is open-source. Interested users are therefore invited to test, comment or contribute to the tool. Submitting issues is the best way to get in touch with the development team, which will address your comment, question, or development request in the best possible way. We are also looking for contributors to the main code, willing to contibute to its capabilities, computational-efficiency, formulation, etc. 
 
 ## License
-[TO DO: Fix licence]
 
-Copyright 2019 RAMP, contributors listed in **Authors**
+Copyright 2020 RAMP-Mobility, contributors listed in **Authors**
 
 Licensed under the European Union Public Licence (EUPL), Version 1.1; you may not use this file except in compliance with the License. 
 
