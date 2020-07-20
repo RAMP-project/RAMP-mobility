@@ -87,7 +87,7 @@ def Initialise_model(dummy_days, full_year, year):
         else:
             num_profiles_user = 365  # normal full year
     else:
-        num_profiles_user = int(input("Please indicate the number of profiles to be generated: ")) #asks the user how many profiles (i.e. code runs) he wants
+        num_profiles_user = int(input("Please indicate the number of profiles (days) to be generated: ")) #asks the user how many profiles (i.e. code runs) he wants
 
     num_profiles_sim = num_profiles_user + (2 * dummy_days)
     
