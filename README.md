@@ -1,3 +1,5 @@
+<img src="https://github.com/RAMP-project/RAMP-mobility/blob/master/RAMP-mobility_logo_basic.png" width="300">
+
 *RAMP-mobility: An open-source bottom-up stochastic model for generating electric vehicles load profiles.*
 
 ---
