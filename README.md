@@ -16,7 +16,7 @@ Also, a newer, fully commented and more user friendly version is under developme
 
 ## European EV load profiles database
 
-The electric vehicles load profiles resulting from the model are available in the "results/European Database" folder. It contains two files:
+The electric vehicles load profiles resulting from the model are available in the "European Database" folder. It contains two files:
 
 * Mobility_profiles: power requested to the battery for mobility purposes.
 * Charging_profiles: power requested to the grid to charge the battery.
