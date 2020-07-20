@@ -44,20 +44,20 @@ def yearly_pattern(country, year):
             Year_behaviour[dict_year[d][1]:year_len:7] = 2
     
     # Adding Vacation days to the Yearly pattern
-    
-    if country == 'RO': 
-        print("[WARNING] Due to a known issue, the automatically installed version of the holidays package is not the latest one containing Romania. Please refer to https://github.com/dr-prodigy/python-holidays/issues/338 for an explanation on how to install holidays' latest version. For the time being holidays from Bulgaria will be used.")
-        country = 'BG'
-    elif country == 'LV':
-        print("[WARNING] Due to a known issue, the automatically installed version of the holidays package is not the latest one containing Latvia. Please refer to https://github.com/dr-prodigy/python-holidays/issues/338 for an explanation on how to install holidays' latest version. For the time being holidays from Lithuania will be used.")
-        country = 'LT'
-    elif country == 'EL': 
+
+    if country == 'EL': 
         country = 'GR'
     elif country == 'FR':
         country = 'FRA'
         
-    holidays_country = list(holidays.CountryHoliday(country, years = year).keys())
-    
+    try:
+        holidays_country = list(holidays.CountryHoliday(country, years = year).keys())
+    except KeyError: 
+        c_error = {'LV':'LT', 'RO':'BG'}
+        print(f"[WARNING] Due to a known issue, the version of the holidays package you automatically installed is the 0.10.2, not containing {country}. Please refer to 'https://github.com/dr-prodigy/python-holidays/issues/338' for an explanation on how to install holidays 0.10.3. Otherwise, holidays from {c_error[country]} will be used.")
+        country = c_error[country]
+        holidays_country = list(holidays.CountryHoliday(country, years = year).keys())
+
     for i in range(len(holidays_country)):
         day_of_year = holidays_country[i].timetuple().tm_yday
         Year_behaviour[day_of_year-1] = 2
