@@ -16,14 +16,15 @@ Also, a newer, fully commented and more user friendly version is under developme
 
 ## European EV load profiles database
 
-The electric vehicles load profiles resulting from the model are available in the "results/Charging profiles Database" folder. It contains two files:
+The electric vehicles load profiles resulting from the model are available in the "results/European Database" folder. It contains two files:
 
 * Mobility_profiles: power requested to the battery for mobility purposes.
 * Charging_profiles: power requested to the grid to charge the battery.
  
-It includes 28 European countries: EU27 minus Cyprus and Malta, plus Norway, Switzerland and the UK.
+28 European countries are included: EU27 minus Cyprus and Malta, plus Norway, Switzerland and the UK.
 
-Four charging strategies are currently implemented to simulate different scenarios. 
+The charging profiles are differentiated by the charging strategy. 
+Four charging strategies are implemented, to simulate different scenarios. 
 
 1. *Uncontrolled*: The base case, where no control over the user behaviour is applied. If the charging point is available, the battery is charged immediately at the nominal power, until a user-defined value of SOC<sub>max</sub>.
 2. *Perfect Foresight*: Strategy aiming at quantifying the possibility to implement a Vehicle-to-grid solution. If the CP is available, the car is charged right before the end of the parking, at the nominal power, until the SOC satisfies the needs of the following
