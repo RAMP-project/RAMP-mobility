@@ -1,4 +1,4 @@
-<img src="https://github.com/RAMP-project/RAMP-mobility/blob/master/RAMP-mobility_logo_basic.png">
+<img src="https://github.com/RAMP-project/RAMP-mobility/blob/master/RAMP-mobility_logo_basic.png" width="300">
 
 *RAMP-mobility: a RAMP application for generating bottom-up stochastic electric vehicles load profiles.*
 
