@@ -16,7 +16,7 @@ The source-code is currently released as v.0.1-pre. This should be regarded as a
 Further details about the conceptual and mathematical model formulation can be found in the RAMP Journal publication (https://doi.org/10.1016/j.energy.2019.04.097). 
 
 Please consider that a Journal publication dedicated only to RAMP-Mobility is under development. 
-Also, a newer, fully commented and more user friendly version is under development and should be released soon.
+Also, a newer, fully commented and more user friendly version is under development and should be released soon. In the while, you can also join our **[Gitter chat](https://gitter.im/RAMP-project/community)** to discuss doubts and make questions about the code!
 
 ## European EV load profiles database
 
