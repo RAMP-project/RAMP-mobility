@@ -1,16 +1,16 @@
 <img src="https://github.com/RAMP-project/RAMP-mobility/blob/master/RAMP-mobility_logo_basic.png" width="300">
 
-*RAMP-mobility: An open-source bottom-up stochastic model for generating electric vehicles load profiles.*
+*RAMP-mobility: a RAMP application for generating bottom-up stochastic electric vehicles load profiles.*
 
 ---
 
 ## Overview
-RAMP-mobility is a new version of the RAMP model for the generation of European electric vehicles mobility and charging profiles.
+RAMP-mobility is an application of the **[RAMP main engine](https://github.com/RAMP-project/RAMP)**, tailored on the generation of European electric vehicles mobility and charging profiles.
 
 This repository contains the complete RAMP-Mobility model. 
 
 The source-code is currently released as v0.1-pre. This should be regarded as a pre-release: it is not yet accompained by a detailed documentation, but the Python code is fully commented in each line to allow a complete understanding of it. 
-Further details about the conceptual and mathematical model formulation can be found in the RAMP Journal publication (https://doi.org/10.1016/j.energy.2019.04.097). 
+Further details about the conceptual and mathematical model formulation of the main engine can be found in the RAMP Journal publication (https://doi.org/10.1016/j.energy.2019.04.097). 
 
 Please consider that a Journal publication dedicated only to RAMP-Mobility is under development. 
 Also, a newer, fully commented and more user friendly version is under development and should be released soon. In the while, you can also join our **[Gitter chat](https://gitter.im/RAMP-project/community)** to discuss doubts and make questions about the code!
