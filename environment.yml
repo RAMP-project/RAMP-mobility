@@ -9,5 +9,5 @@ dependencies:
   - pip
   - pip:
     - convertdate
-    - holidays
+    - https://github.com/dr-prodigy/python-holidays/tarball/master
  
