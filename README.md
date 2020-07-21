@@ -7,39 +7,13 @@
 ## Overview
 RAMP-mobility is a new version of the RAMP model for the generation of European electric vehicles mobility and charging profiles.
 
-This repository contains: 
-
-1. The complete RAMP-Mobility model. 
-2. The European EV load profiles database, containing the results of the model under certain assumptions, ready to be used. 
+This repository contains the complete RAMP-Mobility model. 
 
 The source-code is currently released as v.0.1-pre. This should be regarded as a pre-release: it is not yet accompained by a detailed documentation, but the Python code is fully commented in each line to allow a complete understanding of it. 
 Further details about the conceptual and mathematical model formulation can be found in the RAMP Journal publication (https://doi.org/10.1016/j.energy.2019.04.097). 
 
 Please consider that a Journal publication dedicated only to RAMP-Mobility is under development. 
 Also, a newer, fully commented and more user friendly version is under development and should be released soon. In the while, you can also join our **[Gitter chat](https://gitter.im/RAMP-project/community)** to discuss doubts and make questions about the code!
-
-## European EV load profiles database
-
-The electric vehicles load profiles resulting from the model are available in the "European Database" folder. It contains two files:
-
-* Mobility_profiles: power requested to the battery for mobility purposes.
-* Charging_profiles: power requested to the grid to charge the battery.
- 
-28 European countries are included: EU27 minus Cyprus and Malta, plus Norway, Switzerland and the UK.
-
-The charging profiles are differentiated by the charging strategy. 
-Four charging strategies are implemented, to simulate different scenarios. 
-
-1. *Uncontrolled*: The base case, where no control over the user behaviour is applied. If the charging point is available, the battery is charged immediately at the nominal power, until a user-defined value of SOC<sub>max</sub>.
-2. *Perfect Foresight*: Strategy aiming at quantifying the possibility to implement a Vehicle-to-grid solution. If the charging point is available, the car is charged right before the end of the parking, at the nominal power, until the SOC satisfies the needs of the following
-journey. This allows to compute the part of the vehicle's battery available to the system, without affecting the user driving range. 
-3. *Night Charge*: First smart charging strategy. It aims at shifting the charging events to the night period. The car is charged only if the charging point is available and the parking happens during nighttime.
-4. *RES Integration*: Second smart charging method. Has the goal of coupling the renewable power generation with the transport sector. The car is charged only if the charging point is available and the parking happens during periods when there is excess of renewable power production. As this condition is evaluated through the residual load curve, a file containing it should be provided in the folder "Input_data/Residual Load duration curve".
-
-Only the results of the *Perfect Foresight* strategy are currently uploaded. 
-Please consider that the results of the three other strategies will be uploaded soon. 
-
-If you would like to create your own scenario, please refer to the **Quick start** tab to start using the model and adapt the several customizable parameters to your own needs. 
 
 ## Quick start
 
@@ -54,6 +28,18 @@ conda activate ramp-mobility # Activate the environment
 
 Then, simply run the "RAMP_run.py" script. The console will ask how many profiles (i.e. independent days) need to be simulated, and will provide the results for Italy, based on the default inputs defined in "IT.py". To change country, just select another country from the ones available in the "Input files/Europe" folder. 
 Some guidance about the meaning of each input parameter is available in the "core.py" file, where the *User* and *Appliance* Python classes are defined and fully commented. 
+
+## Model description
+
+28 European countries are included: EU27 minus Cyprus and Malta, plus Norway, Switzerland and the UK.
+
+Four charging strategies are implemented, to simulate different scenarios. 
+
+1. *Uncontrolled*: The base case, where no control over the user behaviour is applied. If the charging point is available, the battery is charged immediately at the nominal power, until a user-defined value of SOC<sub>max</sub>.
+2. *Perfect Foresight*: Strategy aiming at quantifying the possibility to implement a Vehicle-to-grid solution. If the charging point is available, the car is charged right before the end of the parking, at the nominal power, until the SOC satisfies the needs of the following
+journey. This allows to compute the part of the vehicle's battery available to the system, without affecting the user driving range. 
+3. *Night Charge*: First smart charging strategy. It aims at shifting the charging events to the night period. The car is charged only if the charging point is available and the parking happens during nighttime.
+4. *RES Integration*: Second smart charging method. Has the goal of coupling the renewable power generation with the transport sector. The car is charged only if the charging point is available and the parking happens during periods when there is excess of renewable power production. As this condition is evaluated through the residual load curve, a file containing it should be provided in the folder "Input_data/Residual Load duration curve".
 
 ## Authors
 The model has been developed by:
