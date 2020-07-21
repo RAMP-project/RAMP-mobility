@@ -9,7 +9,7 @@ RAMP-mobility is a new version of the RAMP model for the generation of European 
 
 This repository contains the complete RAMP-Mobility model. 
 
-The source-code is currently released as v.0.1-pre. This should be regarded as a pre-release: it is not yet accompained by a detailed documentation, but the Python code is fully commented in each line to allow a complete understanding of it. 
+The source-code is currently released as v0.1-pre. This should be regarded as a pre-release: it is not yet accompained by a detailed documentation, but the Python code is fully commented in each line to allow a complete understanding of it. 
 Further details about the conceptual and mathematical model formulation can be found in the RAMP Journal publication (https://doi.org/10.1016/j.energy.2019.04.097). 
 
 Please consider that a Journal publication dedicated only to RAMP-Mobility is under development. 
