@@ -72,6 +72,9 @@ Politecnico di Milano, Italy <br/>
 **Sylvain Quoilin** <br/>
 KU Leuven, Belgium <br/>
 
+**Matija Pavičević** <br/>
+KU Leuven, Belgium <br/>
+
 **Emanuela Colombo** <br/>
 Politecnico di Milano, Italy <br/>
 
