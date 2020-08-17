@@ -269,12 +269,12 @@ def Charging_Process(Profiles_user, User_list, country, year, dummy_days, residu
             # plug_in_user[Us.user_name].append(plug_in)
             
             Charging_profile = Charging_profile + charging_power
-#            SOC_user[Us.user_name].append(SOC)
+            # SOC_user[Us.user_name].append(SOC)
 #            Charging_profile_user[Us.user_name].append(charging_power)
-#            plug_in_f = plug_in[dummy_minutes:-dummy_minutes]
-#            plug_in_user[Us.user_name].append(plug_in_f)
+            plug_in_f = plug_in[dummy_minutes:-dummy_minutes]*Battery_cap_Us_min
+            plug_in_user[Us.user_name].append(plug_in_f)
 
-            ### Calculate the part of battery capacity available to the TSO for V2G option (deativated)
+            ### Calculate the part of battery capacity available to the TSO for V2G option (deactivated)
             # if charging_mode == 'Perfect Foresight':
             #     en_system = (Battery_cap_Us_min - charging_power) * plug_in
             #     en_sys_tot = en_sys_tot + en_system
@@ -292,13 +292,13 @@ def Charging_Process(Profiles_user, User_list, country, year, dummy_days, residu
                 print(f"[WARNING: Charging process User {i + 1} ({Us.user_name}) not properly constructed, SOC < 0 in time {neg_soc_ind}]") 
                 # SOC_user[Us.user_name].append(SOC)
                 # Charging_profile_user[Us.user_name].append(power_pos)
-                # plug_in_user[Us.user_name].append(plug_in)
-
+                plug_in_user[Us.user_name].append(plug_in*Battery_cap_Us_min)
+                # plug_in_user * Battery_cap_Us_min
         num_us = num_us + Us.num_users
         print(f'Charging Profile of "{Us.user_name}" user completed ({num_us}/{tot_users})') #screen update about progress of computation
     
     Charging_profile = Charging_profile[dummy_minutes:-dummy_minutes]
     # en_sys_tot = en_sys_tot[dummy_minutes:-dummy_minutes]
     
-    return (Charging_profile, Charging_profile_user, SOC_user)
+    return (Charging_profile, Charging_profile_user, SOC_user, plug_in_user)
 

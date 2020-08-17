@@ -220,6 +220,30 @@ def Profile_user_dataframe(Profiles_user, year):
         Profiles_user_df[us_type].set_index(minutes, inplace = True)
        
     return Profiles_user_df
+    
+def plug_in_user_dataframe(plug_in_user, year):
+    
+    for us_type in plug_in_user.keys():
+        plug_in_user[us_type] = np.vstack(plug_in_user[us_type]).T
+    
+    minutes = pd.date_range(start=str(year) + '-01-01', periods = len(plug_in_user[list(plug_in_user.keys())[0]]), freq='T')
+    
+    plug_in_user_df = {}
+    total_battery_cap = 0
+    
+    for us_type in plug_in_user.keys():
+        plug_in_user_df[us_type] = pd.DataFrame(plug_in_user[us_type])
+        plug_in_user_df[us_type].set_index(minutes, inplace = True)
+        total_battery_cap += plug_in_user_df[us_type].max().sum()
+    
+    Plug_in_user_df = pd.DataFrame(index=plug_in_user_df[us_type].index, columns=['Max connected battery cap']).astype(float).fillna(0)
+    
+    for us_type in plug_in_user.keys():
+        Plug_in_user_df['Max connected battery cap'] += plug_in_user_df[us_type].sum(axis=1)
+    
+    Plug_in_user_df = Plug_in_user_df/total_battery_cap
+    
+    return Plug_in_user_df
 
 def Usage_dataframe(Profiles_series, year):
     

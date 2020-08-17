@@ -126,14 +126,17 @@ if charging:
                                                year, dummy_days)
  
     # Charging process function: if no problem is detected, only the cumulative charging profile is calculated. Otherwise, also the user specific quantities are included. 
-    (Charging_profile, Ch_profile_user, SOC_user) = Charging_Process(
+    (Charging_profile, Ch_profile_user, SOC_user, plug_in_user) = Charging_Process(
         Profiles_user_temp, User_list, country, year,dummy_days, 
         residual_load, charging_mode, logistic, infr_prob, Ch_stations)        
 
     Charging_profile_df = pp.Ch_Profile_df(Charging_profile, year) 
-            
+    Plug_in_user_df = pp.plug_in_user_dataframe(plug_in_user, year)
+    
     # Postprocess of charging profiles 
     Charging_profiles_utc = pp.Time_correction(Charging_profile_df, 
+                                               country, year) 
+    Plug_in_user_utc = pp.Time_correction(Plug_in_user_df, 
                                                country, year) 
 
     # Export charging profiles in csv
