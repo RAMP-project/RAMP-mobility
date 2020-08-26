@@ -122,6 +122,7 @@ if write_variables:
     
 if charging:
     
+    # Simulate the charging profile 
     Profiles_user_temp = pp.Profile_temp_users(Profiles_user, temp_profile,
                                                year, dummy_days)
  
@@ -129,7 +130,8 @@ if charging:
     (Charging_profile, Ch_profile_user, SOC_user) = Charging_Process(
         Profiles_user_temp, User_list, country, year,dummy_days, 
         residual_load, charging_mode, logistic, infr_prob, Ch_stations)        
-
+    
+    # Create a dataframe with the profile
     Charging_profile_df = pp.Ch_Profile_df(Charging_profile, year) 
             
     # Postprocess of charging profiles 
