@@ -21,7 +21,7 @@ To get started, make sure that you have git and the [anaconda distribution](http
 
 ```bash
 git clone https://github.com/RAMP-project/RAMP-mobility.git
-cd ../RAMP-mobility
+cd RAMP-mobility
 conda env create  # Automatically creates environment based on environment.yml
 conda activate ramp-mobility # Activate the environment
 ```
