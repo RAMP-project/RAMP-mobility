@@ -63,14 +63,14 @@ def Usage_formatting(stoch_profiles):
 
     return (Usage_avg, Usage_series)
 
-def Profile_cloud_plot(stoch_profiles,stoch_profiles_avg):
+def Profile_cloud_plot(stoch_profiles,stoch_profiles_avg, country):
     #x = np.arange(0,1440,5)
     plt.figure(figsize=(10,5))
     for n in stoch_profiles:
         plt.plot(np.arange(1440),n,'#b0c4de')
         plt.xlabel('Time [h])')
         plt.ylabel('Power [W]')
-        plt.title('Cloud plot')
+        plt.title(f'Cloud plot - {country}')
         plt.ylim(ymin=0)
         #plt.ylim(ymax=5000)
         plt.margins(x=0)

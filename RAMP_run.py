@@ -91,7 +91,7 @@ Profiles_user = pp.Profiles_user_formatting(Profiles_user_list)
 
 # If more than one daily profile is generated, also cloud plots are shown
 if len(Profiles_list) > 1:
-    pp.Profile_cloud_plot(Profiles_list, Profiles_avg)
+    pp.Profile_cloud_plot(Profiles_list, Profiles_avg, country = country)
 
 # Create a dataframe with the profile
 Profiles_df = pp.Profile_dataframe(Profiles_series, year) 
