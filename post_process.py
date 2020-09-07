@@ -133,7 +133,39 @@ def Charging_Profile_df_plot(Profile_df, year, country, color = 'blue', start = 
     ax.set_title("Charging Demand Profile - " + country, fontsize = 15) 
     
     return ax
+    
+def Plug_in_user_df_plot(Profile_df, year, country, color = 'purple', start = '01-01 00:00:00', end = '12-31 23:59:00'):
+    
+    start_plot = str(year) + ' ' + start
+    end_plot = str(year) + ' ' + end
 
+    Profiles_df_plot = Profile_df[start_plot : end_plot]   
+    
+    figsize = (10,5)
+    ax = Profiles_df_plot.plot(kind='line', color=color, rot=0, fontsize=15, legend=False, figsize = figsize)
+    ax.set_ylabel('Charge capacity [-]', fontsize = 15)
+    ax.set_title("Maximum charge capacity - " + country, fontsize = 15) 
+    
+    return ax
+
+def Charging_cap_vs_consumption_plot(Plug_in_user_df, Profile_df, year, country, start = '01-01 00:00:00', end = '12-31 23:59:00'):
+    
+    start_plot = str(year) + ' ' + start
+    end_plot = str(year) + ' ' + end
+    
+    Profiles_df_plot = Profile_df[start_plot : end_plot]/1000
+    Plug_in_user_df_plot = Plug_in_user_df[start_plot : end_plot]
+    
+    figsize = (10,5)
+    
+    ax = Profiles_df_plot.plot(kind='line', color='royalblue', rot=0, fontsize=15, alpha = 0.7, legend=True, figsize = figsize)
+    ax = Plug_in_user_df_plot.plot(kind='line', color='purple', ax = ax, rot=0, fontsize=15, alpha = 0.7, legend=True, figsize = figsize)
+    
+    ax.set_ylabel('Charge capacity  [kW]', fontsize = 15)
+    ax.set_title("Maximum charge capacity vs mobility consumption - " + country, fontsize = 15) 
+
+    return ax
+    
 def Comparison_plot(Profile_df, Charging_Profile_df, year, country, start = '01-01 00:00:00', end = '12-31 23:59:00'):
     
     start_plot = str(year) + ' ' + start
@@ -243,7 +275,7 @@ def plug_in_user_dataframe(plug_in_user, year):
     
     Plug_in_user_df = Plug_in_user_df/total_battery_cap
     
-    return Plug_in_user_df
+    return Plug_in_user_df, (total_battery_cap/60)
 
 def Usage_dataframe(Profiles_series, year):
     
@@ -393,7 +425,7 @@ for i in range (len(Profile)):
 
 # Export Profiles
 
-def export_csv(filename, variable, inputfile, simulation_name):
+def export_csv(filename, variable, inputfile, simulation_name, country, year):
     
     if simulation_name:
         simulation = f'/{simulation_name}/'
@@ -402,7 +434,7 @@ def export_csv(filename, variable, inputfile, simulation_name):
         
     folder = f'results/{inputfile}' + simulation 
     Path(folder).mkdir(parents=True, exist_ok=True) 
-    variable.to_csv(f'{folder}{filename}.csv')
+    variable.to_csv(f'{folder}{year}_{country}_{filename}.csv')
     
 def export_pickle(filename, variable, inputfile, simulation_name):
     

@@ -49,12 +49,12 @@ write_variables = False # Choose to write variables to csv
 # Define folder where results are saved, it will be:
 # "results/inputfile/simulation_name" leave simulation_name False (or "")
 # to avoid the creation of the additional folder
-inputfile = 'Europe/IT'
+inputfile = ''
 simulation_name = ''
 
 # Define country and year to be considered when generating profiles
 country = 'IT'
-year = 2016
+year = 2015
 
 # Choose if simulating the whole year (True) or not (False)
 # if False, the console will ask how many days should be simulated. 
@@ -131,7 +131,7 @@ if charging:
         residual_load, charging_mode, logistic, infr_prob, Ch_stations)        
 
     Charging_profile_df = pp.Ch_Profile_df(Charging_profile, year) 
-    Plug_in_user_df = pp.plug_in_user_dataframe(plug_in_user, year)
+    Plug_in_user_df, tot_battery_cap = pp.plug_in_user_dataframe(plug_in_user, year)
     
     # Postprocess of charging profiles 
     Charging_profiles_utc = pp.Time_correction(Charging_profile_df, 
@@ -140,9 +140,14 @@ if charging:
                                                country, year) 
 
     # Export charging profiles in csv
-    pp.export_csv('Charging Profiles', Charging_profiles_utc, inputfile, simulation_name)
+    # pp.export_csv('Charging Profiles', Charging_profiles_utc, inputfile, simulation_name)
 
     # Plot the charging profile
     pp.Charging_Profile_df_plot(Charging_profiles_utc, color = 'green', start = '01-01 00:00:00', end = '12-31 23:59:00', year = year, country = country)
-            
+    pp.Plug_in_user_df_plot(Plug_in_user_utc, color = 'purple', start = '01-01 00:00:00', end = '12-31 23:59:00', year = year, country = country)
+    
+    pp.export_csv('Fleet consumption Profiles', Profiles_temp_h, inputfile, simulation_name)
+    pp.export_csv('Max charge limit Profiles', Plug_in_user_utc, inputfile, simulation_name)
+       
+      
 print('\nExecution Time:', datetime.now() - startTime)
