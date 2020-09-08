@@ -234,11 +234,16 @@ def temp_import(country, year, inputfile_temp = r"Input_data\temp_ninja_pop.csv"
       
     temp_profile = pd.read_csv(inputfile_temp, index_col = 0)
     temp_profile = pd.DataFrame(temp_profile[country]) 
-    if year < 2016:
+    if 1980 < year < 2016:
         temp_profile = temp_profile.loc[temp_profile.index.str.contains(str(year)+ '|' + str(year-1)+ '|' + str(year+1))]
-    else:
+    elif year == 2016:
         temp_profile_short = temp_profile.loc[temp_profile.index.str.contains(str(year)+ '|' + str(year-1))]
         temp_profile = temp_profile_short.append(temp_profile.loc[temp_profile.index.str.contains(str(year-1))])
+    elif year == 1980:
+        temp_profile_short = temp_profile.loc[temp_profile.index.str.contains(str(year)+ '|' + str(year+1))]
+        temp_profile = temp_profile.loc[temp_profile.index.str.contains(str(year+1))].append(temp_profile_short)
+    else: 
+        raise ValueError('[WARNING] External Temperature data not found for the selected year. Please provide a valid temperature data file in the "Input data/" folder.')                        
 
     hours = pd.period_range(start=str(year-1) + '-01-01', end=str(year+1) + '-12-31 23:00', freq='H')
     temp_profile.set_index(hours, inplace = True)
