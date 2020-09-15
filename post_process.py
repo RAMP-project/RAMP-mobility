@@ -63,14 +63,14 @@ def Usage_formatting(stoch_profiles):
 
     return (Usage_avg, Usage_series)
 
-def Profile_cloud_plot(stoch_profiles,stoch_profiles_avg, country):
+def Profile_cloud_plot(stoch_profiles,stoch_profiles_avg):
     #x = np.arange(0,1440,5)
     plt.figure(figsize=(10,5))
     for n in stoch_profiles:
         plt.plot(np.arange(1440),n,'#b0c4de')
         plt.xlabel('Time [h])')
         plt.ylabel('Power [W]')
-        plt.title(f'Cloud plot - {country}')
+        plt.title('Cloud plot')
         plt.ylim(ymin=0)
         #plt.ylim(ymax=5000)
         plt.margins(x=0)
@@ -234,16 +234,11 @@ def temp_import(country, year, inputfile_temp = r"Input_data\temp_ninja_pop.csv"
       
     temp_profile = pd.read_csv(inputfile_temp, index_col = 0)
     temp_profile = pd.DataFrame(temp_profile[country]) 
-    if 1980 < year < 2016:
+    if year < 2016:
         temp_profile = temp_profile.loc[temp_profile.index.str.contains(str(year)+ '|' + str(year-1)+ '|' + str(year+1))]
-    elif year == 2016:
+    else:
         temp_profile_short = temp_profile.loc[temp_profile.index.str.contains(str(year)+ '|' + str(year-1))]
         temp_profile = temp_profile_short.append(temp_profile.loc[temp_profile.index.str.contains(str(year-1))])
-    elif year == 1980:
-        temp_profile_short = temp_profile.loc[temp_profile.index.str.contains(str(year)+ '|' + str(year+1))]
-        temp_profile = temp_profile.loc[temp_profile.index.str.contains(str(year+1))].append(temp_profile_short)
-    else: 
-        raise ValueError('[WARNING] External Temperature data not found for the selected year. Please provide a valid temperature data file in the "Input data/" folder.')                        
 
     hours = pd.period_range(start=str(year-1) + '-01-01', end=str(year+1) + '-12-31 23:00', freq='H')
     temp_profile.set_index(hours, inplace = True)

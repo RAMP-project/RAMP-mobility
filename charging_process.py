@@ -52,7 +52,7 @@ def Charging_Process(Profiles_user, User_list, country, year, dummy_days, residu
     
     #
     if 'RES Integration' in charging_mode:
-        if residual_load == 0:
+        if not residual_load.any(None):
             raise ValueError("[WARNING] RES Integration detected as charging strategy, but the residual load file is not found. Please provide a csv file containing the residual load curve.")                        
     
     # Check that the initial SOC is in the expected way

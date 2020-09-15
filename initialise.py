@@ -189,13 +189,20 @@ def pv_indexing(minutes, country, year, inputfile_pv = r"Input_data\ninja_pv_eur
     return pv_ind
 
 def residual_load(minutes, residual_load, year, country):
-        
+    
+    if country == 'EL':
+        country_tz = 'GR'
+    elif country == 'UK':
+        country_tz = 'GB'
+    else:
+        country_tz = country
+
     residual_load_temp = pd.DataFrame(residual_load.values)
     
-    ind_init = pd.date_range(start= f'{year}-01-01', end=f'{year}-12-31 23:00', freq='H', tz = 'UTC')
+    ind_init = pd.date_range(start= f'{year}-01-01', end=f'{year}-12-31 23:00', freq='T', tz = 'UTC')
     residual_load_temp.set_index(ind_init, inplace = True)
     
-    residual_load_temp_tz = residual_load_temp.tz_convert(pytz.country_timezones[country][0])
+    residual_load_temp_tz = residual_load_temp.tz_convert(pytz.country_timezones[country_tz][0])
     
     residual_load_temp = residual_load_temp_tz.tz_localize(None, ambiguous = 'NaT') # Remove the timezone information (local time)
     residual_load_temp = residual_load_temp[~residual_load_temp.index.duplicated(keep='first')] # Remove duplicate hours arising from tz conversion
