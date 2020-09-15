@@ -9,7 +9,10 @@ import copy
 import matplotlib.ticker as mtick
 from pathlib import Path
 import pickle
-from initialise import tot_users_calc, tot_battery_cap_calc
+from ramp_mobility.utils import tot_users_calc, tot_battery_cap_calc
+
+
+# from initialise import tot_users_calc, tot_battery_cap_calc
 import datetime as dt
 #import enlopy as el
 
@@ -230,7 +233,7 @@ def Usage_dataframe(Profiles_series, year):
    
     return Profiles_df
 
-def temp_import(country, year, inputfile_temp = r"Input_data\temp_ninja_pop.csv"):
+def temp_import(country, year, inputfile_temp = r"..\Input_data\temp_ninja_pop.csv"):
       
     temp_profile = pd.read_csv(inputfile_temp, index_col = 0)
     temp_profile = pd.DataFrame(temp_profile[country]) 

@@ -24,10 +24,18 @@ under the License.
 
 #%% Import required modules
 
-from stochastic_process_mobility import Stochastic_Process_Mobility
-from charging_process import Charging_Process
+import sys,os
+sys.path.append('../')
+import ramp_mobility
 
-import post_process as pp
+from core_model.stochastic_process_mobility import Stochastic_Process_Mobility
+from core_model.charging_process import Charging_Process
+from post_process import post_process as pp
+
+# from stochastic_process_mobility import Stochastic_Process_Mobility
+# from charging_process import Charging_Process
+# import post_process as pp
+
 import pandas as pd
 from datetime import datetime
 
@@ -61,7 +69,7 @@ for c in countries:
 
     # Choose if simulating the whole year (True) or not (False)
     # if False, the console will ask how many days should be simulated. 
-    full_year = True
+    full_year = False
     
     # Define attributes for the charging profiles
     charging_mode = 'RES Integration' # Select charging mode (Uncontrolled', 'Night Charge', 'RES Integration', 'Perfect Foresight')
@@ -71,11 +79,11 @@ for c in countries:
     Ch_stations = ([3.7, 11, 120], [0.6, 0.3, 0.1]) # Define nominal power of charging stations and their probability 
     
     #inputfile for the temperature data: 
-    inputfile_temp = r"Input_data\temp_ninja_pop.csv"
+    inputfile_temp = r"..\Input_data\temp_ninja_pop.csv"
     
     ## If simulating the RES Integration charging strategy, a file with the residual load curve should be included in the folder
     try:
-        inputfile_residual_load = fr"Input_data\Residual Load duration curve\residual load\residual_load_{c}.csv"
+        inputfile_residual_load = fr"..\Input_data\Residual Load duration curve\residual load\residual_load_{c}.csv"
         residual_load = pd.read_csv(inputfile_residual_load, index_col = 0)
     except FileNotFoundError:      
         residual_load = pd.DataFrame(0, index=range(1), columns=range(1))

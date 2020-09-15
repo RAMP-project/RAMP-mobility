@@ -10,7 +10,8 @@ import numpy as np
 import random 
 import pandas as pd
 import datetime as dt
-import initialise
+from ramp_mobility import utils
+
 # from initialise import (charge_prob, charge_prob_const, SOC_initial_f, 
 # SOC_initial_f_const, charge_check_smart, charge_check_normal, pv_indexing, 
 # tot_users_calc)
@@ -41,7 +42,7 @@ def Charging_Process(Profiles_user, User_list, country, year, dummy_days, residu
     t2 = '19:00'
     
     # Calculate the number of users in simulation for screen update
-    tot_users = initialise.tot_users_calc(User_list)
+    tot_users = utils.tot_users_calc(User_list)
       
     # Load multiplier for the residual load calculation
     load_multiplier = 2.5
@@ -81,9 +82,9 @@ def Charging_Process(Profiles_user, User_list, country, year, dummy_days, residu
 
     # Check if introducing the logistic function for behavioural modeling
     if logistic: # Probability of charging based on the SOC of the car 
-        ch_prob = initialise.charge_prob
+        ch_prob = utils.charge_prob
     else: # The user will always try to charge (probability = 1 for every SOC)
-        ch_prob = initialise.charge_prob_const
+        ch_prob = utils.charge_prob_const
     
     # Check which infrastructure probability function to use 
     if infr_prob == 'piecewise': # Use of piecewise function based on hour of the day 
@@ -104,16 +105,16 @@ def Charging_Process(Profiles_user, User_list, country, year, dummy_days, residu
     # Definition of range in which the charging is shifted
     if charging_mode == 'Night Charge':
         charge_range = minutes.indexer_between_time('22:00', '7:00', include_start=True, include_end=False)
-        charge_range_check = initialise.charge_check_smart
+        charge_range_check = utils.charge_check_smart
     elif charging_mode == 'Self-consumption':
-        charge_range = initialise.pv_indexing(minutes, country, year, inputfile_pv = r"Input_data\ninja_pv_europe_v1.1_merra2.csv")
-        charge_range_check = initialise.charge_check_smart
+        charge_range = utils.pv_indexing(minutes, country, year, inputfile_pv = r"Input_data\ninja_pv_europe_v1.1_merra2.csv")
+        charge_range_check = utils.charge_check_smart
     elif charging_mode == "RES Integration":
-        charge_range = initialise.residual_load(minutes, residual_load, year, country)
-        charge_range_check = initialise.charge_check_smart
+        charge_range = utils.residual_load(minutes, residual_load, year, country)
+        charge_range_check = utils.charge_check_smart
     else: 
         charge_range = 0
-        charge_range_check = initialise.charge_check_normal
+        charge_range_check = utils.charge_check_normal
 
     print('\nPlease wait for the charging profiles...')   
     
@@ -148,9 +149,9 @@ def Charging_Process(Profiles_user, User_list, country, year, dummy_days, residu
             
             #Control rountine on the Initial SOC value
             if SOC_initial == 'random': #function to select random value
-                SOC_init = initialise.SOC_initial_f(SOC_max, SOC_min_rand, SOC_initial)           
+                SOC_init = utils.SOC_initial_f(SOC_max, SOC_min_rand, SOC_initial)           
             elif isinstance(SOC_initial, (int, float)): # If initial SOC is a number, that will be the initial SOC
-                SOC_init = initialise.SOC_initial_f_const(SOC_max, SOC_min_rand, SOC_initial)    
+                SOC_init = utils.SOC_initial_f_const(SOC_max, SOC_min_rand, SOC_initial)    
             
             # Calculation of the SOC array
             SOC = delta_soc
