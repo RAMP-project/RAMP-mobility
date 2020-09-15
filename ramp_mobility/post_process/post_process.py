@@ -379,7 +379,7 @@ def export_csv(filename, variable, inputfile, simulation_name):
     else:
         simulation = '/'
         
-    folder = f'results/{inputfile}' + simulation 
+    folder = f'../results/{inputfile}' + simulation 
     Path(folder).mkdir(parents=True, exist_ok=True) 
     variable.to_csv(f'{folder}{filename}.csv')
     
@@ -390,7 +390,7 @@ def export_pickle(filename, variable, inputfile, simulation_name):
     else:
         simulation = '/'
 
-    folder = f'results/{inputfile}' + simulation  
+    folder = f'../results/{inputfile}' + simulation  
     Path(folder).mkdir(parents=True, exist_ok=True) 
 
     file = open(f'{folder}{filename}.pkl','wb')
