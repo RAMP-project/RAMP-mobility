@@ -66,7 +66,6 @@ for c in countries:
     # Define attributes for the charging profiles
     charging_mode = 'RES Integration' # Select charging mode (Uncontrolled', 'Night Charge', 'RES Integration', 'Perfect Foresight')
     logistic = False # Select the use of a logistic curve to model the probability of charging based on the SOC of the car
-    #SOC_initial = 'random' # Initial SOC at first minute ('random', number between SOC_min (default 0.2) and 1)
     infr_prob = 0.8 # Probability of finding the infrastructure when parking ('piecewise', number between 0 and 1)
     Ch_stations = ([3.7, 11, 120], [0.6, 0.3, 0.1]) # Define nominal power of charging stations and their probability 
     
@@ -119,9 +118,9 @@ for c in countries:
     
     #Exporting all the main quantities
     if write_variables:
-        pp.export_csv('Profiles', Profiles_temp, inputfile, simulation_name)
-        pp.export_csv('Profiles Hourly', Profiles_temp_h, inputfile, simulation_name)
-        pp.export_csv('Usage', Usage_utc, inputfile, simulation_name)
+        pp.export_csv('Mobility Profiles', Profiles_temp, inputfile, simulation_name)
+        pp.export_csv('Mobility Profiles Hourly', Profiles_temp_h, inputfile, simulation_name)
+        pp.export_csv('Usage Profiles', Usage_utc, inputfile, simulation_name)
     #   pp.export_pickle('Profiles_User', Profiles_user_temp, inputfile, simulation_name)
         
     if charging:
