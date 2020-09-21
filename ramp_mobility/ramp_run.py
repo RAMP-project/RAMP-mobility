@@ -51,7 +51,7 @@ and naming further input files with corresponding country code
 #%% Inputs definition
 
 charging = True         # True or False to select to activate the calculation of the charging profiles
-write_variables = True # Choose to write variables to csv
+write_variables = True  # Choose to write variables to csv
 
 countries = ['AT', 'BE', 'BG', 'CH', 'CZ', 'DE', 'DK', 'EE', 'EL', 'ES', 'FI', 'FR', 'HR', 'HU',
    'IE', 'IT','LT', 'LU','LV', 'NL', 'NO', 'PL', 'PT', 'RO', 'SE', 'SI', 'SK', 'UK']
@@ -127,8 +127,8 @@ for c in countries:
     
     #Exporting all the main quantities
     if write_variables:
-        pp.export_csv('Profiles', Profiles_temp, inputfile, simulation_name)
-        pp.export_csv('Profiles Hourly', Profiles_temp_h, inputfile, simulation_name)
+        pp.export_csv('Mobility Profiles', Profiles_temp, inputfile, simulation_name)
+        pp.export_csv('Mobility Profiles Hourly', Profiles_temp_h, inputfile, simulation_name)
         pp.export_csv('Usage', Usage_utc, inputfile, simulation_name)
     #   pp.export_pickle('Profiles_User', Profiles_user_temp, inputfile, simulation_name)
         

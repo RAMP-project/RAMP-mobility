@@ -43,10 +43,7 @@ def Charging_Process(Profiles_user, User_list, country, year, dummy_days, residu
     
     # Calculate the number of users in simulation for screen update
     tot_users = utils.tot_users_calc(User_list)
-      
-    # Load multiplier for the residual load calculation
-    load_multiplier = 2.5
-    
+         
     # Check that the charging mode is one of the expected ones
     charging_mode_types = ['Uncontrolled', 'Night Charge', 'Self-consumption', 'RES Integration', 'Perfect Foresight']
     assert charging_mode in charging_mode_types, f"[WARNING] Invalid Charging Mode. Expected one of: {charging_mode_types}"
