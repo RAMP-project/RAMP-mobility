@@ -37,7 +37,7 @@ occasional_use['saturday'] = 0.6
 occasional_use['sunday'] = 0.5
 occasional_use['free time'] = {'weekday': 0.15, 'weekend': 0.3} #1/7, meaning taking car for free time once a week
 
-#Calibartion parameters for the Velocity - Power Curve [kW]
+#Calibration parameters for the Velocity - Power Curve [kW]
 Par_P_EV = {}
 
 Par_P_EV['small']  = [0.26, -13, 546]

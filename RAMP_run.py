@@ -53,7 +53,7 @@ for c in countries:
     # "results/inputfile/simulation_name" leave simulation_name False (or "")
     # to avoid the creation of the additional folder
     inputfile = f'Europe/{c}'
-    simulation_name = 'RES Integration'
+    simulation_name = ''
     
     # Define country and year to be considered when generating profiles
     country = f'{c}'
@@ -61,10 +61,10 @@ for c in countries:
 
     # Choose if simulating the whole year (True) or not (False)
     # if False, the console will ask how many days should be simulated. 
-    full_year = True
+    full_year = False
     
     # Define attributes for the charging profiles
-    charging_mode = 'RES Integration' # Select charging mode (Uncontrolled', 'Night Charge', 'RES Integration', 'Perfect Foresight')
+    charging_mode = 'Uncontrolled' # Select charging mode (Uncontrolled', 'Night Charge', 'RES Integration', 'Perfect Foresight')
     logistic = False # Select the use of a logistic curve to model the probability of charging based on the SOC of the car
     infr_prob = 0.8 # Probability of finding the infrastructure when parking ('piecewise', number between 0 and 1)
     Ch_stations = ([3.7, 11, 120], [0.6, 0.3, 0.1]) # Define nominal power of charging stations and their probability 
