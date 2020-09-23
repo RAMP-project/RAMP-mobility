@@ -5,11 +5,7 @@
 Input data definition 
 '''
 
-from ramp_mobility.core_model.core import User
-import numpy as np
-import pandas as pd
-import copy
-
+from core import User, np, pd, copy
 User_list = []
 
 '''Common values used in the input data definition'''
@@ -41,7 +37,7 @@ occasional_use['saturday'] = 0.6
 occasional_use['sunday'] = 0.5
 occasional_use['free time'] = {'weekday': 0.15, 'weekend': 0.3} #1/7, meaning taking car for free time once a week
 
-#Calibartion parameters for the Velocity - Power Curve [kW]
+#Calibration parameters for the Velocity - Power Curve [kW]
 Par_P_EV = {}
 
 Par_P_EV['small']  = [0.26, -13, 546]
@@ -66,7 +62,7 @@ country_dict = {'AT':'DE', 'CH':'DE', 'CZ':'DE', 'DK':'DE', 'FI':'DE', 'HU':'DE'
 
 #%% Files with the inputs to be loaded 
 
-inputfolder = r"../Input_data/"
+inputfolder = r"Input_data/"
 
 # Selection of the equivalent country from the dictionary defined above
 if country in set(country_dict.values()):
