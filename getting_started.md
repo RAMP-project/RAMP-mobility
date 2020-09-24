@@ -1,8 +1,6 @@
 <img src="https://github.com/RAMP-project/RAMP-mobility/blob/master/RAMP-mobility_logo.png" width="300">
 
-*RAMP-mobility - Getting started.*
-
----
+# RAMP-mobility - Getting started.
 
 This short tutorial describes the main steps to get a practical example of RAMP-Mobility running.
 
