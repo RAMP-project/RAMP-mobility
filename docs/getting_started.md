@@ -1,4 +1,4 @@
-<img src="https://github.com/RAMP-project/RAMP-mobility/blob/master/RAMP-mobility_logo.png" width="300">
+<img src="https://github.com/RAMP-project/RAMP-mobility/blob/master/docs/RAMP-mobility_logo.png" width="300">
 
 # RAMP-mobility - Getting started.
 
