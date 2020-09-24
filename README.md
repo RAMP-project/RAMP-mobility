@@ -46,11 +46,10 @@ The model has been developed by:
 
 **Andrea Mangipinto** <br/>
 Politecnico di Milano, Italy <br/>
-E-mail: andrea.mangipinto@gmail.com<br/>
 
 **Francesco Lombardi** <br/>
 Politecnico di Milano, Italy <br/>
-E-mail: francesco.lombardi@polimi.it <br/>
+(Correspondence should be sent to: francesco.lombardi@polimi.it <br/>)
 
 **Francesco Sanvito** <br/>
 Politecnico di Milano, Italy <br/>
