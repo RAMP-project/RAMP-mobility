@@ -1,4 +1,4 @@
-name: ramp-mobility
+name: ramp_mobility
 
 dependencies:
   - python=3.7
