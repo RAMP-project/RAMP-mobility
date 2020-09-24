@@ -23,11 +23,11 @@ Please refer to the complete **[getting started](https://github.com/RAMP-project
 RAMP-mobility consits of 2 main modules:
 
 **Module 1:** bottom-up stochastic simulation of electric vehicle mobility profiles
-<img src="https://github.com/RAMP-project/RAMP-mobility/blob/master/docs/module_1.png" width="1200">
+<img src="https://github.com/RAMP-project/RAMP-mobility/blob/master/docs/module_1.png" width="600">
 
 
 **Module 2:** simulation, for each electric vehicle, of a charging profile based on the previously obtained mobility pattern
-<img src="https://github.com/RAMP-project/RAMP-mobility/blob/master/docs/module_2.png" width="1200">
+<img src="https://github.com/RAMP-project/RAMP-mobility/blob/master/docs/module_2.png" width="600">
 
 28 European countries are included: EU27 minus Cyprus and Malta, plus Norway, Switzerland and the UK.
 
