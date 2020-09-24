@@ -20,7 +20,8 @@ Please refer to the complete **[getting started](https://github.com/RAMP-project
 
 ## Model description
 
-RAMP-mobility consits of 2 main modules:
+RAMP-mobility covers 28 European countries, namely: EU27 minus Cyprus and Malta, plus Norway, Switzerland and the UK. 
+The model consists of 2 main modules:
 
 **Module 1:** bottom-up stochastic simulation of electric vehicle mobility profiles
 
@@ -28,10 +29,6 @@ RAMP-mobility consits of 2 main modules:
 
 
 **Module 2:** simulation, for each electric vehicle, of a charging profile based on the previously obtained mobility pattern
-
-<img src="https://github.com/RAMP-project/RAMP-mobility/blob/master/docs/module_2.png" width="600">
-
-28 European countries are included: EU27 minus Cyprus and Malta, plus Norway, Switzerland and the UK.
 
 Four pre-defined charging strategies are implemented, to simulate different plausible scenarios: 
 
@@ -41,6 +38,8 @@ journey. This allows to compute the part of the vehicle's battery available to t
 3. *Night Charge*: First smart charging strategy. It aims at shifting the charging events to the night period. The car is charged only if the charging point is available and the parking happens during nighttime.
 4. *RES Integration*: Second smart charging method. Has the goal of coupling the renewable power generation with the transport sector. The car is charged only if the charging point is available and the parking happens during periods when there is excess of renewable power production. As this condition is evaluated through the residual load curve, a file containing it should be provided in the folder "Input_data/Residual Load duration curve".
 
+<img src="https://github.com/RAMP-project/RAMP-mobility/blob/master/docs/module_2.png" width="600">
+
 ## Authors
 The model has been developed by:
 
@@ -49,7 +48,7 @@ Politecnico di Milano, Italy <br/>
 
 **Francesco Lombardi** <br/>
 Politecnico di Milano, Italy <br/>
-(Correspondence should be sent to: francesco.lombardi@polimi.it <br/>)
+(Correspondence should be sent to: francesco.lombardi@polimi.it) <br/>
 
 **Francesco Sanvito** <br/>
 Politecnico di Milano, Italy <br/>
