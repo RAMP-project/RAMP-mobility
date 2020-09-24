@@ -25,7 +25,7 @@ The model consists of 2 main modules:
 
 **Module 1:** bottom-up stochastic simulation of electric vehicle mobility profiles
 
-<img align="cener" src="https://github.com/RAMP-project/RAMP-mobility/blob/master/docs/module_1.png" width="600">
+<img align="center" src="https://github.com/RAMP-project/RAMP-mobility/blob/master/docs/module_1.png" width="600">
 
 
 **Module 2:** simulation, for each electric vehicle, of a charging profile based on the previously obtained mobility pattern
