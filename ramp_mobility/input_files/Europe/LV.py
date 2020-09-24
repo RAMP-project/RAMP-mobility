@@ -5,7 +5,11 @@
 Input data definition 
 '''
 
-from core import User, np, pd, copy
+from ramp_mobility.core_model.core import User
+import numpy as np
+import pandas as pd
+import copy
+
 User_list = []
 
 '''Common values used in the input data definition'''
@@ -62,7 +66,7 @@ country_dict = {'AT':'DE', 'CH':'DE', 'CZ':'DE', 'DK':'DE', 'FI':'DE', 'HU':'DE'
 
 #%% Files with the inputs to be loaded 
 
-inputfolder = r"Input_data/"
+inputfolder = r"../Input_data/"
 
 # Selection of the equivalent country from the dictionary defined above
 if country in set(country_dict.values()):
