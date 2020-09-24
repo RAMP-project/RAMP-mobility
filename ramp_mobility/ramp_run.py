@@ -72,7 +72,7 @@ for c in countries:
     full_year = False
     
     # Define attributes for the charging profiles
-    charging_mode = 'Uncontrolled' # Select charging mode (Uncontrolled', 'Night Charge', 'RES Integration', 'Perfect Foresight')
+    charging_mode = 'RES Integration' # Select charging mode (Uncontrolled', 'Night Charge', 'RES Integration', 'Perfect Foresight')
     logistic = False # Select the use of a logistic curve to model the probability of charging based on the SOC of the car
     infr_prob = 0.8 # Probability of finding the infrastructure when parking ('piecewise', number between 0 and 1)
     Ch_stations = ([3.7, 11, 120], [0.6, 0.3, 0.1]) # Define nominal power of charging stations and their probability 
@@ -82,7 +82,7 @@ for c in countries:
     
     ## If simulating the RES Integration charging strategy, a file with the residual load curve should be included in the folder
     try:
-        inputfile_residual_load = fr"..\database\residual_load\residual load\residual_load_{c}.csv"
+        inputfile_residual_load = fr"..\database\residual_load\residual_load_{c}.csv"
         residual_load = pd.read_csv(inputfile_residual_load, index_col = 0)
     except FileNotFoundError:      
         residual_load = pd.DataFrame(0, index=range(1), columns=range(1))
