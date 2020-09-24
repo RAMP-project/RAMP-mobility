@@ -17,17 +17,7 @@ Also, a newer, fully commented and more user friendly version is under developme
 
 ## Quick start
 
-To get started, make sure that you have git and the [anaconda distribution](https://www.anaconda.com/distribution/) installed and type the following in the Anaconda Prompt:
-
-```bash
-git clone https://github.com/RAMP-project/RAMP-mobility.git
-cd RAMP-mobility
-conda env create  # Automatically creates environment based on environment.yml
-conda activate ramp-mobility # Activate the environment
-```
-
-Then, simply run the "RAMP_run.py" script. The console will ask how many profiles (i.e. independent days) need to be simulated, and will provide the results for Italy, based on the default inputs defined in "IT.py". To change country, just select another country from the ones available in the "Input files/Europe" folder. 
-Some guidance about the meaning of each input parameter is available in the "core.py" file, where the *User* and *Appliance* Python classes are defined and fully commented. 
+Please refer to the complete **[getting started](https://github.com/RAMP-project/RAMP-mobility/blob/master/getting_started.md)** guide for instructions on how to run RAMP-Mobility. 
 
 ## Model description
 
