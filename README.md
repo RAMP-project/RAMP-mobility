@@ -1,4 +1,4 @@
-<img src="https://github.com/RAMP-project/RAMP-mobility/blob/master/RAMP-mobility_logo.png" width="300">
+<img src="https://github.com/RAMP-project/RAMP-mobility/blob/master/docs/RAMP-mobility_logo.png" width="300">
 
 *RAMP-mobility: a RAMP application for generating bottom-up stochastic electric vehicles load profiles.*
 
@@ -11,16 +11,23 @@ This repository contains the complete RAMP-Mobility model, entirely developed in
 
 In the while, further details about the conceptual and mathematical model formulation of the RAMP software engine can be found in the original RAMP Journal publication (https://doi.org/10.1016/j.energy.2019.04.097). What is more, you are welcome to join our **[Gitter chat](https://gitter.im/RAMP-project/community)** to discuss doubts and make questions about the code!
 
-<img src="https://github.com/RAMP-project/RAMP-mobility/blob/master/example_profiles.png" width="1200">
+<img src="https://github.com/RAMP-project/RAMP-mobility/blob/master/docs/example_profiles.jpg" width="1200">
 
 
 ## Quick start
 
-Please refer to the complete **[getting started](https://github.com/RAMP-project/RAMP-mobility/blob/master/getting_started.md)** guide for instructions on how to run RAMP-Mobility. This includes information about installation and Python dependencies, as well as a minimum walkthrough of model structure and usage.
+Please refer to the complete **[getting started](https://github.com/RAMP-project/RAMP-mobility/blob/master/docs/getting_started.md)** guide for instructions on how to run RAMP-Mobility. This includes information about installation and Python dependencies, as well as a minimum walkthrough of model structure and usage.
 
 ## Model description
 
-RAMP-mobility consits of 2 main parts: i) the bottom-up stochastic simulation of electric vehicle mobility profiles; and ii) the simulation, for each electric vehicle, of a charging profile based on the previously obtained mobility pattern.
+RAMP-mobility consits of 2 main modules:
+
+**Module 1:** bottom-up stochastic simulation of electric vehicle mobility profiles
+<img src="https://github.com/RAMP-project/RAMP-mobility/blob/master/docs/module_1.png" width="1200">
+
+
+**Module 2:** simulation, for each electric vehicle, of a charging profile based on the previously obtained mobility pattern
+<img src="https://github.com/RAMP-project/RAMP-mobility/blob/master/docs/module_2.png" width="1200">
 
 28 European countries are included: EU27 minus Cyprus and Malta, plus Norway, Switzerland and the UK.
 
