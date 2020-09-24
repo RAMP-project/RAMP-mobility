@@ -74,10 +74,10 @@ def user_defined_inputs(inputfile):
     '''
     inputfile_module = inputfile.replace('/', '.')
     
-    file_module = importlib.import_module(f'ramp_mobility.input_files.{inputfile_module}')
+    file_module = importlib.import_module(f'ramp_mobility.country_input_files.{inputfile_module}')
     User_list = file_module.User_list
     
-    # User_list = getattr((importlib.import_module(f'input_files.{inputfile_module}')), 'User_list')
+    # User_list = getattr((importlib.import_module(f'country_input_files.{inputfile_module}')), 'User_list')
     return(User_list)
 
 def Initialise_model(dummy_days, full_year, year):

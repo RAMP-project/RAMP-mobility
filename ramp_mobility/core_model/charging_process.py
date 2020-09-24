@@ -104,7 +104,7 @@ def Charging_Process(Profiles_user, User_list, country, year, dummy_days, residu
         charge_range = minutes.indexer_between_time('22:00', '7:00', include_start=True, include_end=False)
         charge_range_check = utils.charge_check_smart
     elif charging_mode == 'Self-consumption':
-        charge_range = utils.pv_indexing(minutes, country, year, inputfile_pv = r"Input_data\ninja_pv_europe_v1.1_merra2.csv")
+        charge_range = utils.pv_indexing(minutes, country, year, inputfile_pv = r"input_data\ninja_pv_europe_v1.1_merra2.csv")
         charge_range_check = utils.charge_check_smart
     elif charging_mode == "RES Integration":
         charge_range = utils.residual_load(minutes, residual_load, year, country)
