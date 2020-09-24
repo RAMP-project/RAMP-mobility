@@ -1,6 +1,4 @@
-<p align="center">
 <img src="https://github.com/RAMP-project/RAMP-mobility/blob/master/docs/RAMP-mobility_logo.png" width="300">
-</p>
 
 *RAMP-mobility: a RAMP application for generating bottom-up stochastic electric vehicles load profiles.*
 
@@ -13,9 +11,7 @@ This repository contains the complete RAMP-Mobility model, entirely developed in
 
 In the while, further details about the conceptual and mathematical model formulation of the RAMP software engine can be found in the original RAMP Journal publication (https://doi.org/10.1016/j.energy.2019.04.097). What is more, you are welcome to join our **[Gitter chat](https://gitter.im/RAMP-project/community)** to discuss doubts and make questions about the code!
 
-<p align="center">
 <img src="https://github.com/RAMP-project/RAMP-mobility/blob/master/docs/example_profiles.jpg" width="1200">
-</p>
 
 ## Quick start
 
@@ -28,9 +24,7 @@ The model consists of 2 main modules:
 
 **Module 1:** bottom-up stochastic simulation of electric vehicle mobility profiles
 
-<p align="center">
 <img src="https://github.com/RAMP-project/RAMP-mobility/blob/master/docs/module_1.png" width="600">
-</p>
 
 **Module 2:** simulation, for each electric vehicle, of a charging profile based on the previously obtained mobility pattern
 
