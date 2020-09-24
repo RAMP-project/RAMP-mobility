@@ -7,23 +7,22 @@
 ## Overview
 RAMP-mobility is an application of the **[RAMP main engine](https://github.com/RAMP-project/RAMP)**, tailored on the generation of European electric vehicles mobility and charging profiles.
 
-This repository contains the complete RAMP-Mobility model. 
+This repository contains the complete RAMP-Mobility model, entirely developed in Python 3.6. The model is currently released as v0.2-pre, which should be regarded as a pre-release. As such, it includes a minimum 'quick-start' documentation (see below), complemented by the code being fully commented in each line to allow a complete understanding of it. A more thorougly documented version of the repository is under development and should be released soon, alongside a Journal publication.
 
-The source-code is currently released as v0.1-pre. This should be regarded as a pre-release: it is not yet accompained by a detailed documentation, but the Python code is fully commented in each line to allow a complete understanding of it. 
-Further details about the conceptual and mathematical model formulation of the main engine can be found in the RAMP Journal publication (https://doi.org/10.1016/j.energy.2019.04.097). 
+In the while, further details about the conceptual and mathematical model formulation of the RAMP software engine can be found in the original RAMP Journal publication (https://doi.org/10.1016/j.energy.2019.04.097). What is more, you are welcome to join our **[Gitter chat](https://gitter.im/RAMP-project/community)** to discuss doubts and make questions about the code!
 
-Please consider that a Journal publication dedicated only to RAMP-Mobility is under development. 
-Also, a newer, fully commented and more user friendly version is under development and should be released soon. In the while, you can also join our **[Gitter chat](https://gitter.im/RAMP-project/community)** to discuss doubts and make questions about the code!
 
 ## Quick start
 
-Please refer to the complete **[getting started](https://github.com/RAMP-project/RAMP-mobility/blob/master/getting_started.md)** guide for instructions on how to run RAMP-Mobility. 
+Please refer to the complete **[getting started](https://github.com/RAMP-project/RAMP-mobility/blob/master/getting_started.md)** guide for instructions on how to run RAMP-Mobility. This includes information about installation and Python dependencies, as well as a minimum walkthrough of model structure and usage.
 
 ## Model description
 
+RAMP-mobility consits of 2 main parts: i) the bottom-up stochastic simulation of electric vehicle mobility profiles; and ii) the simulation, for each electric vehicle, of a charging profile based on the previously obtained mobility pattern.
+
 28 European countries are included: EU27 minus Cyprus and Malta, plus Norway, Switzerland and the UK.
 
-Four charging strategies are implemented, to simulate different scenarios. 
+Four pre-defined charging strategies are implemented, to simulate different plausible scenarios: 
 
 1. *Uncontrolled*: The base case, where no control over the user behaviour is applied. If the charging point is available, the battery is charged immediately at the nominal power, until a user-defined value of SOC<sub>max</sub>.
 2. *Perfect Foresight*: Strategy aiming at quantifying the possibility to implement a Vehicle-to-grid solution. If the charging point is available, the car is charged right before the end of the parking, at the nominal power, until the SOC satisfies the needs of the following
