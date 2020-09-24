@@ -51,7 +51,7 @@ def charge_check_normal(ind_park_range, charge_range):
 
     return b
 
-def pv_indexing(minutes, country, year, inputfile_pv = r"input_data\ninja_pv_europe_v1.1_merra2.csv"):
+def pv_indexing(minutes, country, year, inputfile_pv = r"database\ninja_pv_europe_v1.1_merra2.csv"):
       
     pv_af = pd.read_csv(inputfile_pv, index_col = 0) #Read the input file
     pv_af = pd.DataFrame(pv_af[country]) #Filter only for needed country

@@ -66,7 +66,7 @@ country_dict = {'AT':'DE', 'CH':'DE', 'CZ':'DE', 'DK':'DE', 'FI':'DE', 'HU':'DE'
 
 #%% Files with the inputs to be loaded 
 
-inputfolder = r"../input_data/"
+inputfolder = r"../database/"
 
 # Selection of the equivalent country from the dictionary defined above
 if country in set(country_dict.values()):

@@ -82,7 +82,7 @@ Four variables have to be defined for the charging process function:
 1.	Uncontrolled: the base case, where no control over the user behaviour is applied. If the charging point is available, the battery is charged immediately at the nominal power, until a user-defined value of SOCmax.
 2.	Perfect Foresight: strategy aiming at quantifying the possibility to implement a Vehicle-to-grid solution. If the charging point is available, the car is charged right before the end of the parking, at the nominal power, until the SOC satisfies the needs of the following journey. This allows to compute the part of the vehicle's battery available to the system, without affecting the user driving range.
 3.	Night Charge: first smart charging strategy. It aims at shifting the charging events to the night period. The car is charged only if the charging point is available and the parking happens during nighttime.
-4.	RES Integration: second smart charging method. Has the goal of coupling the renewable power generation with the transport sector. The car is charged only if the charging point is available and the parking happens during periods when there is excess of renewable power production. As this condition is evaluated through the residual load curve, a file containing it should be provided in the folder "Input_data/Residual Load duration curve/residual load".
+4.	RES Integration: second smart charging method. Has the goal of coupling the renewable power generation with the transport sector. The car is charged only if the charging point is available and the parking happens during periods when there is excess of renewable power production. As this condition is evaluated through the residual load curve, a file containing it should be provided in the folder "database/residual_load/residual load".
 
 *logistic*: activates the use of a logistic curve to model the probability of charging based on the SOC of the car. This makes the probability of charging higher, the lower the car SOC. The shape of the curve is defined in the charge_prob(SOC) function, in the “initialise.py” file.
 
@@ -119,11 +119,11 @@ Next, the input file for the temperature data (automatically provided with data 
 
 ```python
 #inputfile for the temperature data: 
-inputfile_temp = r"Input_data\temp_ninja_pop.csv"
+inputfile_temp = r"database\temp_ninja_pop.csv"
 
 ## If simulating the RES Integration charging strategy, a file with the residual load curve should be included in the folder
 try:
-    inputfile_residual_load = fr"Input_data\Residual Load duration curve\residual load\residual_load_{c}.csv"
+    inputfile_residual_load = fr"database\residual_load\residual_load_{c}.csv"
     residual_load = pd.read_csv(inputfile_residual_load, index_col = 0)
 except FileNotFoundError:      
     residual_load = pd.DataFrame(0, index=range(1), columns=range(1))
@@ -208,9 +208,9 @@ Then, the calibration parameters for the velocity-power curve are defined, throu
 
 The *Battery_cap* dictionary defines the size of the battery (in kWh) for the 3 different types of cars modelled in the default version.
 
-### Data from “Input_data” folder
+### Data from “database” folder
 
-In the “input_data/” folder, some csv provide the additional data needed to run the model. 
+In the “database/” folder, some csv provide the additional data needed to run the model. 
 - The share of different vehicles among the country population is provided by the *pop_share.csv* and *vehicle_share.csv* files. 
 - The mobility data are provided by the *d_tot.csv* (total daily driven distance), *d_min.csv* (average travel distance by trip) and *t_func.csv* (average driven time by trip).
 - The *windows.csv* file provides the functioning windows when the EV is switched on for each country during the day. 
