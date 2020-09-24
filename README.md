@@ -11,6 +11,8 @@ This repository contains the complete RAMP-Mobility model, entirely developed in
 
 In the while, further details about the conceptual and mathematical model formulation of the RAMP software engine can be found in the original RAMP Journal publication (https://doi.org/10.1016/j.energy.2019.04.097). What is more, you are welcome to join our **[Gitter chat](https://gitter.im/RAMP-project/community)** to discuss doubts and make questions about the code!
 
+<img src="https://github.com/RAMP-project/RAMP-mobility/blob/master/example_profiles.png" width="1200">
+
 
 ## Quick start
 
