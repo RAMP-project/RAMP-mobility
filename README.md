@@ -23,10 +23,12 @@ Please refer to the complete **[getting started](https://github.com/RAMP-project
 RAMP-mobility consits of 2 main modules:
 
 **Module 1:** bottom-up stochastic simulation of electric vehicle mobility profiles
+
 <img src="https://github.com/RAMP-project/RAMP-mobility/blob/master/docs/module_1.png" width="600">
 
 
 **Module 2:** simulation, for each electric vehicle, of a charging profile based on the previously obtained mobility pattern
+
 <img src="https://github.com/RAMP-project/RAMP-mobility/blob/master/docs/module_2.png" width="600">
 
 28 European countries are included: EU27 minus Cyprus and Malta, plus Norway, Switzerland and the UK.
@@ -67,8 +69,8 @@ Politecnico di Milano, Italy <br/>
 Please cite the original Journal publication if you use RAMP in your research:
 *F. Lombardi, S. Balderrama, S. Quoilin, E. Colombo, Generating high-resolution multi-energy load profiles for remote areas with an open-source stochastic model, Energy, 2019, https://doi.org/10.1016/j.energy.2019.04.097.*
 
-Additionally, you may cite the master thesis where RAMP-Mobility was developed:
-*A. Mangipinto, Development of electric vehicles load profiles for sector coupling in European energy system models, Master Thesis, Politecnico di Milano, 2020.*
+Additionally, you may cite the EMP-E presentation of RAMP-mobility:
+*A. Mangipinto, F. Lombardi, F. Sanvito, S. Quoilin, M. Pavičević, E. Colombo, RAMP-mobility: time series of electric vehicle consumption and charging strategies for all European countries, Master Thesis, EMP-E, 2020.*
 
 ## Contribute
 This project is open-source. Interested users are therefore invited to test, comment or contribute to the tool. Submitting issues is the best way to get in touch with the development team, which will address your comment, question, or development request in the best possible way. We are also looking for contributors to the main code, willing to contibute to its capabilities, computational-efficiency, formulation, etc. 
