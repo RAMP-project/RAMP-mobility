@@ -78,7 +78,7 @@ for c in countries:
     Ch_stations = ([3.7, 11, 120], [0.6, 0.3, 0.1]) # Define nominal power of charging stations and their probability 
     
     #inputfile for the temperature data: 
-    inputfile_temp = r"..\database\temp_ninja_pop.csv"
+    inputfile_temp = r"..\database\temp_ninja_pop_1980-2019.csv"
     
     ## If simulating the RES Integration charging strategy, a file with the residual load curve should be included in the folder
     try:
