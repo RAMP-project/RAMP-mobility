@@ -52,10 +52,12 @@ Politecnico di Milano, Italy <br/>
 
 **Francesco Lombardi** <br/>
 Politecnico di Milano, Italy <br/>
+<img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2F1000logos.net%2Fwp-content%2Fuploads%2F2017%2F06%2FTwitter-Logo.png&f=1&nofb=1" width="20"/> [@FrLomb](https://twitter.com/FrLomb)
 (Correspondence should be sent to: francesco.lombardi@polimi.it) <br/>
 
 **Francesco Sanvito** <br/>
 Politecnico di Milano, Italy <br/>
+<img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2F1000logos.net%2Fwp-content%2Fuploads%2F2017%2F06%2FTwitter-Logo.png&f=1&nofb=1" width="20"/> [@FrancescoSanvi2](https://twitter.com/FrancescoSanvi2)
 
 **Sylvain Quoilin** <br/>
 KU Leuven, Belgium <br/>
