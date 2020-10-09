@@ -7,7 +7,7 @@
 ## Overview
 RAMP-mobility is an original application of the open-source **[RAMP software engine](https://github.com/RAMP-project/RAMP)**, tailored to the generation of European electric vehicles mobility and charging profiles at high temporal resolution (1-min).
 
-This repository contains the complete RAMP-Mobility model, entirely developed in Python 3.6. The model is currently released as v0.2-pre, which should be regarded as a pre-release. As such, it includes a minimum 'quick-start' documentation (see below), complemented by the code being fully commented in each line to allow a complete understanding of it. A more thorougly documented version of the repository is under development and should be released soon, alongside a Journal publication.
+This repository contains the complete RAMP-Mobility model, entirely developed in Python 3.6. The model is currently released as v1.0. It includes a minimum 'quick-start' documentation (see below), complemented by the code being fully commented in each line to allow a complete understanding of it. A more thorougly documented version of the repository is under development and should be released soon, alongside a Journal publication.
 
 In the while, further details about the conceptual and mathematical model formulation of the RAMP software engine can be found in the original RAMP Journal publication (https://doi.org/10.1016/j.energy.2019.04.097). What is more, you are welcome to join our **[Gitter chat](https://gitter.im/RAMP-project/community)** to discuss doubts and make questions about the code!
 
