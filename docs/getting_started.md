@@ -142,7 +142,7 @@ except FileNotFoundError:
 
 ### User-defined inputs
 
-28 input files are automatically provided in the “Input_files/Europe” folder, one for each of the included countries. 
+28 input files are automatically provided in the “country_input_files/Europe” folder, one for each of the included countries. 
 
 ```python
 '''Common values used in the input data definition'''
