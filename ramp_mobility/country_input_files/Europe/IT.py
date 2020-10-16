@@ -18,7 +18,7 @@ User_list = []
 country = 'IT'
 
 #Total number of users to be simulated
-tot_users = 10
+tot_users = 50
 
 #Variabilities 
 r_w = {}
@@ -208,43 +208,43 @@ Users
 ### Working ###
 
 Working_L = User(name = "Working - Large car", us_pref = 0,
-                 n_users = max(1,int(round(tot_users*pop_sh['working']*vehicle_sh['large']))))
+                 n_users = int(round(tot_users*pop_sh['working']*vehicle_sh['large'])))
 User_list.append(Working_L)
 
 Working_M = User(name = "Working - Medium car", us_pref = 0,
-                  n_users = max(1,int(round(tot_users*pop_sh['working']*vehicle_sh['medium']))))
+                  n_users = int(round(tot_users*pop_sh['working']*vehicle_sh['medium'])))
 User_list.append(Working_M)
 
 Working_S = User(name = "Working - Small car", us_pref = 0,
-                  n_users = max(1,int(round(tot_users*pop_sh['working']*vehicle_sh['small']))))
+                  n_users = int(round(tot_users*pop_sh['working']*vehicle_sh['small'])))
 User_list.append(Working_S)
 
 ### Student ###
 
 Student_L = User(name = "Student - Large car", us_pref = 0,
-                  n_users = max(1,int(round(tot_users*pop_sh['student']*vehicle_sh['large']))))
+                  n_users = int(round(tot_users*pop_sh['student']*vehicle_sh['large'])))
 User_list.append(Student_L)
 
 Student_M = User(name = "Student - Medium car", us_pref = 0,
-                  n_users = max(1,int(round(tot_users*pop_sh['student']*vehicle_sh['medium']))))
+                  n_users = int(round(tot_users*pop_sh['student']*vehicle_sh['medium'])))
 User_list.append(Student_M)
 
 Student_S = User(name = "Student - Small car", us_pref = 0,
-                  n_users = max(1,int(round(tot_users*pop_sh['student']*vehicle_sh['small']))))
+                  n_users = int(round(tot_users*pop_sh['student']*vehicle_sh['small'])))
 User_list.append(Student_S)
 
 ### Inactive ###
 
 Inactive_L = User(name = "Inactive - Large car", us_pref = 0,
-                  n_users = max(1,int(round(tot_users*pop_sh['inactive']*vehicle_sh['large']))))
+                  n_users = int(round(tot_users*pop_sh['inactive']*vehicle_sh['large'])))
 User_list.append(Inactive_L)
 
 Inactive_M = User(name = "Inactive - Medium car", us_pref = 0,
-                  n_users = max(1,int(round(tot_users*pop_sh['inactive']*vehicle_sh['medium']))))
+                  n_users = int(round(tot_users*pop_sh['inactive']*vehicle_sh['medium'])))
 User_list.append(Inactive_M)
 
 Inactive_S = User(name = "Inactive - Small car", us_pref = 0,
-                  n_users = max(1,int(round(tot_users*pop_sh['inactive']*vehicle_sh['small']))))
+                  n_users = int(round(tot_users*pop_sh['inactive']*vehicle_sh['small'])))
 User_list.append(Inactive_S)
 
 #%% Definition of Appliances
