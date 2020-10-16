@@ -53,8 +53,11 @@ and naming further input files with corresponding country code
 charging = True         # True or False to select to activate the calculation of the charging profiles
 write_variables = True  # Choose to write variables to csv
 
-countries = ['AT', 'BE', 'BG', 'CH', 'CZ', 'DE', 'DK', 'EE', 'EL', 'ES', 'FI', 'FR', 'HR', 'HU',
-   'IE', 'IT','LT', 'LU','LV', 'NL', 'NO', 'PL', 'PT', 'RO', 'SE', 'SI', 'SK', 'UK']
+countries = ['IT'] #Simulating of a small district in Italy 
+
+# Other countries are ignored:
+#['AT', 'BE', 'BG', 'CH', 'CZ', 'DE', 'DK', 'EE', 'EL', 'ES', 'FI', 'FR', 'HR', 'HU',
+# 'IE', 'IT','LT', 'LU','LV', 'NL', 'NO', 'PL', 'PT', 'RO', 'SE', 'SI', 'SK', 'UK']
 
 for c in countries:
     # Define folder where results are saved, it will be:
