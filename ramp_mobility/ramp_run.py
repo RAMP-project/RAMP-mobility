@@ -32,10 +32,6 @@ from core_model.stochastic_process_mobility import Stochastic_Process_Mobility
 from core_model.charging_process import Charging_Process
 from post_process import post_process as pp
 
-# from stochastic_process_mobility import Stochastic_Process_Mobility
-# from charging_process import Charging_Process
-# import post_process as pp
-
 import pandas as pd
 from datetime import datetime
 
@@ -50,11 +46,12 @@ and naming further input files with corresponding country code
 '''
 #%% Inputs definition
 
-charging = True         # True or False to select to activate the calculation of the charging profiles
+charging = True         # True or False to select to activate the calculation of the charging profiles 
 write_variables = True  # Choose to write variables to csv
+full_year = False       # Choose if simulating the whole year (True) or not (False), if False, the console will ask how many days should be simulated.
 
 countries = ['AT', 'BE', 'BG', 'CH', 'CZ', 'DE', 'DK', 'EE', 'EL', 'ES', 'FI', 'FR', 'HR', 'HU',
-   'IE', 'IT','LT', 'LU','LV', 'NL', 'NO', 'PL', 'PT', 'RO', 'SE', 'SI', 'SK', 'UK']
+    'IE', 'IT','LT', 'LU','LV', 'NL', 'NO', 'PL', 'PT', 'RO', 'SE', 'SI', 'SK', 'UK']
 
 for c in countries:
     # Define folder where results are saved, it will be:
@@ -66,10 +63,6 @@ for c in countries:
     # Define country and year to be considered when generating profiles
     country = f'{c}'
     year = 2016
-
-    # Choose if simulating the whole year (True) or not (False)
-    # if False, the console will ask how many days should be simulated. 
-    full_year = False
     
     # Define attributes for the charging profiles
     charging_mode = 'Uncontrolled' # Select charging mode (Uncontrolled', 'Night Charge', 'RES Integration', 'Perfect Foresight')
