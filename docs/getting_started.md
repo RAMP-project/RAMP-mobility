@@ -35,11 +35,12 @@ The file is divided in different sections. After the preamble and the import of 
 
 charging = True         # True or False to select to activate the calculation of the charging profiles
 write_variables = True # Choose to write variables to csv
+full_year = False # Choose if simulating the whole year (True) or not (False) if False, the console will ask how many days should be simulated.
 
 countries = ['AT', 'BE', 'BG', 'CH', 'CZ', 'DE', 'DK', 'EE', 'EL', 'ES', 'FI', 'FR', 'HR', 'HU',
    'IE', 'IT','LT', 'LU','LV', 'NL', 'NO', 'PL', 'PT', 'RO', 'SE', 'SI', 'SK', 'UK']
 ```
-The first step is the definition of the control variables *charging*, which activates the calculation of the EV charging profile based on the mobility profile and *write_variables* which activates the writing of the variables in cvs files.
+The first step is the definition of the control variables *charging*, which activates the calculation of the EV charging profile based on the mobility profile and *write_variables* which activates the writing of the variables in cvs files. Also, the *full_year* variable allows choosing if simulating the whole year (True) or not (False). If False, the console will ask how many days should be simulated. This is useful when simulating different countries within a for loop. 
 
 Then, for each of the selected countries (at the moment only EU27 plus United Kingdom, Norway and Switzerland minus Malta and Cyprus are supported) the model is simulated. 
 
@@ -54,17 +55,12 @@ for c in countries:
     # Define country and year to be considered when generating profiles
     country = f'{c}'
     year = 2016
-
-    # Choose if simulating the whole year (True) or not (False)
-    # if False, the console will ask how many days should be simulated. 
-    full_year = False
 ```
 
 The variables to be defined are:
 
 - *simulation_name*: defines the folder where results are saved, it will be: “results/inputfile/simulation_name" leave it False (or "") to avoid the creation of the additional folder.
 - *year*: defines the simulated year
-- *full_year*: allows choosing if simulating the whole year (True) or not (False). If False, the console will ask how many days should be simulated. This is useful when simulating different countries within a for loop. 
 
 ### Charging process function parameters
 
@@ -84,7 +80,7 @@ Four variables have to be defined for the charging process function:
 3.	Night Charge: first smart charging strategy. It aims at shifting the charging events to the night period. The car is charged only if the charging point is available and the parking happens during nighttime.
 4.	RES Integration: second smart charging method. Has the goal of coupling the renewable power generation with the transport sector. The car is charged only if the charging point is available and the parking happens during periods when there is excess of renewable power production. As this condition is evaluated through the residual load curve, a file containing it should be provided in the folder "database/residual_load/residual load".
 
-*logistic*: activates the use of a logistic curve to model the probability of charging based on the SOC of the car. This makes the probability of charging higher, the lower the car SOC. The shape of the curve is defined in the charge_prob(SOC) function, in the “initialise.py” file.
+*logistic*: activates the use of a logistic curve to model the probability of charging based on the SOC of the car. This makes the probability of charging higher, the lower the car SOC. The shape of the curve is defined in the charge_prob(SOC) function, in the “utils.py” file.
 
 ```python
 def charge_prob(SOC):
