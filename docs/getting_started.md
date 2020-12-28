@@ -40,7 +40,12 @@ full_year = False # Choose if simulating the whole year (True) or not (False) if
 countries = ['AT', 'BE', 'BG', 'CH', 'CZ', 'DE', 'DK', 'EE', 'EL', 'ES', 'FI', 'FR', 'HR', 'HU',
    'IE', 'IT','LT', 'LU','LV', 'NL', 'NO', 'PL', 'PT', 'RO', 'SE', 'SI', 'SK', 'UK']
 ```
-The first step is the definition of the control variables *charging*, which activates the calculation of the EV charging profile based on the mobility profile and *write_variables* which activates the writing of the variables in cvs files. Also, the *full_year* variable allows choosing if simulating the whole year (True) or not (False). If False, the console will ask how many days should be simulated. This is useful when simulating different countries within a for loop. 
+
+The first step is the definition of some control variables:
+
+- *charging*: activates the calculation of the EV charging profile based on the mobility profile.
+- *write_variables*: activates the writing of the variables in cvs files. 
+- *full_year*:  allows choosing if simulating the whole year (True) or not (False). If False, the console will ask how many days should be simulated. This is useful when simulating different countries within a for loop. 
 
 Then, for each of the selected countries (at the moment only EU27 plus United Kingdom, Norway and Switzerland minus Malta and Cyprus are supported) the model is simulated. 
 
