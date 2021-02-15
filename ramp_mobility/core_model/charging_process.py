@@ -202,13 +202,15 @@ def Charging_Process(Profiles_user, User_list, country, year, dummy_days, residu
                 # Control to check if the user can charge based on infrastructure 
                 # availability, SOC, time of the day (Depending on the options activated)
                 if (
+                    (
                     (ch_prob(SOC_park) > np.random.rand() and
                     infr_pr[park_ind[park][0]] > np.random.rand() and
                     charge_range_check(ind_park_range, charge_range)
                     ) or 
                     (np.around(SOC_park, 2) <= SOC_min) or
                     (np.floor(residual_energy) <= np.ceil(en_next_travel/eff))
-                    ): 
+                    ) and 
+                    np.around(SOC_park, 2) <= 1): 
                                         
                     # Calculates the parking time
                     t_park = park_ind[park][1] - park_ind[park][0]                 
