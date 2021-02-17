@@ -11,6 +11,7 @@ import random
 import pandas as pd
 import datetime as dt
 from ramp_mobility import utils
+import math
 
 # from initialise import (charge_prob, charge_prob_const, SOC_initial_f, 
 # SOC_initial_f_const, charge_check_smart, charge_check_normal, pv_indexing, 
@@ -216,14 +217,13 @@ def Charging_Process(Profiles_user, User_list, country, year, dummy_days, residu
                     
                     # Samples the nominal power of the charging station
                     P_ch_nom = random.choices(P_ch_station_list, weights=prob_ch_station)[0]                
-                    # Sets a limiting power that hinders the car to be charged at a P > Battery capacity (e.g. battery = 100 kWh, P_lim = 100 kW)
-                    P_ch_max = Battery_cap_Us_h 
                     
                     # In the case of perfect foresight the charging is shifted at the end of the parking, so a special routine is needed
                     if charging_mode == 'Perfect Foresight': 
-                        P_charge = min(P_ch_nom, P_ch_max) # Charge at nominal power
-                        t_ch_tot = int(round(en_charge_tot/P_ch_nom)) 
+                        t_ch_nom = min(en_charge_tot / P_ch_nom, t_park) # charging time with nominal power (float)
+                        t_ch_tot = - (en_charge_tot // -P_ch_nom) # Fast way to perform the operation: int(math.ceil(en_charge_tot/P_ch_nom)) 
                         t_ch = min(t_ch_tot, t_park) # charge until SOC max, if parking time allows                   
+                        P_charge = P_ch_nom*t_ch_nom/t_ch #charging for an integer number of minutes at the power equivalent to the one that would charge en_charge_tot without rounding
                         charge_end = park_ind[park][1]
                         charge_start = charge_end - t_ch
                         power[charge_start: charge_end] = P_charge
@@ -235,20 +235,16 @@ def Charging_Process(Profiles_user, User_list, country, year, dummy_days, residu
                                 charge_ind_range = np.intersect1d(ind_park_range, charge_range)
                                 # Minimum charging power (charging during night time)
                                 P_ch_min = min(en_charge_tot/len(charge_ind_range), P_ch_nom)
-                                P_charge = min(P_ch_min,P_ch_max) 
-                                t_ch = len(charge_ind_range)
-                                charge_start = charge_ind_range[0]
-                                charge_end = charge_ind_range[-1] + 1
-                                np.put(power, charge_ind_range, P_charge)
+                                np.put(power, charge_ind_range, P_ch_min)
                             # if intersection array is empty means that we are in forced charging 
                             # (SOC<0.2 / too low SOC residual), or in uncontrolled charging mode
                             except (FloatingPointError, ZeroDivisionError): 
-                                # Total charging time at P nominal 
-                                t_ch_tot = int(round(en_charge_tot/P_ch_nom)) 
+                                t_ch_nom = min(en_charge_tot / P_ch_nom, t_park) # charging time with nominal power (float)
+                                t_ch_tot = - (en_charge_tot // -P_ch_nom) # Fast way to perform the operation: int(math.ceil(en_charge_tot/P_ch_nom)) 
                                 t_ch = min(t_ch_tot, t_park) # charge until SOC max, if parking time allows                   
+                                P_charge = P_ch_nom*t_ch_nom/t_ch #charging for an integer number of minutes at the power equivalent to the one that would charge en_charge_tot without rounding
                                 charge_start = park_ind[park][0]
                                 charge_end = charge_start + t_ch
-                                P_charge = min(P_ch_nom, P_ch_max) # Charge at nominal power
                                 power[charge_start: charge_end] = P_charge
                                                 
                     delta_soc = power / Battery_cap_Us_min 
