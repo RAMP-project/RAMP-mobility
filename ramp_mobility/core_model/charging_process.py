@@ -134,6 +134,7 @@ def Charging_Process(Profiles_user, User_list, country, year, dummy_days, residu
         power_Us = power_Us[:,np.where(power_Us.any(axis=0))[0]] 
         
         Battery_cap_Us_min = Us.App_list[0].Battery_cap * 60 # Capacity multiplied by 60 to evaluate the capacity in kWmin
+        Battery_cap_Us_h = Us.App_list[0].Battery_cap # Capacity multiplied by 60 to evaluate the capacity in kWmin
         
         for i in range(power_Us.shape[1]): # Simulates for each single user with at least one travel
             
@@ -168,12 +169,9 @@ def Charging_Process(Profiles_user, User_list, country, year, dummy_days, residu
                 # The iteration for park = 0 is needed only for Perfect Foresight strategy. For the other cases the first loop is skipped.
                 if charging_mode != 'Perfect Foresight' and park == 0:
                     continue
-                else:
-                    pass
                 
                 # SOC at the beginning of the parking
                 SOC_park = SOC[park_ind[park][0]]
-                
                 
                 # For the time based charging methods, the index of the parking period is calculated.
                 # In the other cases is set to a dummy variable to avoid interection with "dummy" charge range
@@ -218,10 +216,12 @@ def Charging_Process(Profiles_user, User_list, country, year, dummy_days, residu
                     
                     # Samples the nominal power of the charging station
                     P_ch_nom = random.choices(P_ch_station_list, weights=prob_ch_station)[0]                
-                                        
+                    # Sets a limiting power that hinders the car to be charged at a P > Battery capacity (e.g. battery = 100 kWh, P_lim = 100 kW)
+                    P_ch_max = Battery_cap_Us_h 
+                    
                     # In the case of perfect foresight the charging is shifted at the end of the parking, so a special routine is needed
                     if charging_mode == 'Perfect Foresight': 
-                        P_charge = P_ch_nom # Charge at nominal power
+                        P_charge = min(P_ch_nom, P_ch_max) # Charge at nominal power
                         t_ch_tot = int(round(en_charge_tot/P_ch_nom)) 
                         t_ch = min(t_ch_tot, t_park) # charge until SOC max, if parking time allows                   
                         charge_end = park_ind[park][1]
@@ -235,7 +235,7 @@ def Charging_Process(Profiles_user, User_list, country, year, dummy_days, residu
                                 charge_ind_range = np.intersect1d(ind_park_range, charge_range)
                                 # Minimum charging power (charging during night time)
                                 P_ch_min = min(en_charge_tot/len(charge_ind_range), P_ch_nom)
-                                P_charge = P_ch_min
+                                P_charge = min(P_ch_min,P_ch_max) 
                                 t_ch = len(charge_ind_range)
                                 charge_start = charge_ind_range[0]
                                 charge_end = charge_ind_range[-1] + 1
@@ -248,7 +248,7 @@ def Charging_Process(Profiles_user, User_list, country, year, dummy_days, residu
                                 t_ch = min(t_ch_tot, t_park) # charge until SOC max, if parking time allows                   
                                 charge_start = park_ind[park][0]
                                 charge_end = charge_start + t_ch
-                                P_charge = P_ch_nom # Charge at nominal power
+                                P_charge = min(P_ch_nom, P_ch_max) # Charge at nominal power
                                 power[charge_start: charge_end] = P_charge
                                                 
                     delta_soc = power / Battery_cap_Us_min 
