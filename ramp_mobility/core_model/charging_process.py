@@ -174,6 +174,11 @@ def Charging_Process(Profiles_user, User_list, country, year, dummy_days, residu
                 # SOC at the beginning of the parking
                 SOC_park = SOC[park_ind[park][0]]
                 
+                if SOC_park >= SOC_max:
+                    continue
+                else:
+                    pass
+                
                 # For the time based charging methods, the index of the parking period is calculated.
                 # In the other cases is set to a dummy variable to avoid interection with "dummy" charge range
                 if charging_mode in ['Night Charge', 'Self-consumption', 'RES Integration']:
@@ -221,7 +226,7 @@ def Charging_Process(Profiles_user, User_list, country, year, dummy_days, residu
                     # In the case of perfect foresight the charging is shifted at the end of the parking, so a special routine is needed
                     if charging_mode == 'Perfect Foresight': 
                         t_ch_nom = min(en_charge_tot / P_ch_nom, t_park) # charging time with nominal power (float)
-                        t_ch_tot = - (en_charge_tot // -P_ch_nom) # Fast way to perform the operation: int(math.ceil(en_charge_tot/P_ch_nom)) 
+                        t_ch_tot = int(- (en_charge_tot // -P_ch_nom)) # Fast way to perform the operation: int(math.ceil(en_charge_tot/P_ch_nom)) 
                         t_ch = min(t_ch_tot, t_park) # charge until SOC max, if parking time allows                   
                         P_charge = P_ch_nom*t_ch_nom/t_ch #charging for an integer number of minutes at the power equivalent to the one that would charge en_charge_tot without rounding
                         charge_end = park_ind[park][1]
@@ -240,7 +245,7 @@ def Charging_Process(Profiles_user, User_list, country, year, dummy_days, residu
                             # (SOC<0.2 / too low SOC residual), or in uncontrolled charging mode
                             except (FloatingPointError, ZeroDivisionError): 
                                 t_ch_nom = min(en_charge_tot / P_ch_nom, t_park) # charging time with nominal power (float)
-                                t_ch_tot = - (en_charge_tot // -P_ch_nom) # Fast way to perform the operation: int(math.ceil(en_charge_tot/P_ch_nom)) 
+                                t_ch_tot = int(- (en_charge_tot // -P_ch_nom)) # Fast way to perform the operation: int(math.ceil(en_charge_tot/P_ch_nom)) 
                                 t_ch = min(t_ch_tot, t_park) # charge until SOC max, if parking time allows                   
                                 P_charge = P_ch_nom*t_ch_nom/t_ch #charging for an integer number of minutes at the power equivalent to the one that would charge en_charge_tot without rounding
                                 charge_start = park_ind[park][0]
