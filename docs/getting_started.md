@@ -21,7 +21,7 @@ To get started, make sure that you have git installed and type the following in 
 git clone https://github.com/RAMP-project/RAMP-mobility.git
 cd RAMP-mobility
 conda env create  # Automatically creates environment based on environment.yml
-conda activate ramp-mobility # Activate the environment
+conda activate ramp_mobility # Activate the environment
 ```
 The above commands create a dedicated environment so that your anaconda configuration remains clean from the required dependencies installed. 
 Then, using your favourite IDE (the model is developed with [Spyder](https://www.spyder-ide.org/)) open the RAMP_run.py script.
