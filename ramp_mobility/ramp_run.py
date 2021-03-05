@@ -6,13 +6,13 @@ electric vehicles load profiles in Europe, called RAMP-mobility.
 
 @authors:
 - Andrea Mangipinto, Politecnico di Milano
-- Francesco Lombardi, Politecnico di Milano
+- Francesco Lombardi, TU Delft
 - Francesco Sanvito, Politecnico di Milano
 - Sylvain Quoilin, KU Leuven
 - Emanuela Colombo, Politecnico di Milano
 
 Copyright 2020 RAMP, contributors listed above.
-Licensed under the European Union Public Licence (EUPL), Version 1.1;
+Licensed under the European Union Public Licence (EUPL), Version 1.2;
 you may not use this file except in compliance with the License.
 
 Unless required by applicable law or agreed to in writing,
