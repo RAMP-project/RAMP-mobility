@@ -162,11 +162,11 @@ def Charging_Process(Profiles_user, User_list, country, year, dummy_days, residu
             park_ind = np.split(park_ind, np.where(np.diff(park_ind) != 1)[0]+1)
             park_ind = [[ind[0],ind[-1]+1] for ind in park_ind] #list of array of index of when there is a mobility travel
             
-            en_to_charge = 0  # Initialise value for perfect foresight chaging mode          
+            en_to_charge = 0  # Initialise value for perfect foresight charging mode          
             
             # Iterates over all parkings (park = 0 corresponds to the period where no travel was made yet, so is not evaluated)
             for park in range(0, len(park_ind)): 
-                
+
                 # The iteration for park = 0 is needed only for Perfect Foresight strategy. For the other cases the first loop is skipped.
                 if charging_mode != 'Perfect Foresight' and park == 0:
                     continue
@@ -174,10 +174,10 @@ def Charging_Process(Profiles_user, User_list, country, year, dummy_days, residu
                 # SOC at the beginning of the parking
                 SOC_park = SOC[park_ind[park][0]]
                 
-                if SOC_park >= SOC_max:
-                    continue
-                else:
-                    pass
+                # if SOC_park >= SOC_max:
+                #     continue
+                # else:
+                #     pass
                 
                 # For the time based charging methods, the index of the parking period is calculated.
                 # In the other cases is set to a dummy variable to avoid interection with "dummy" charge range
@@ -191,7 +191,10 @@ def Charging_Process(Profiles_user, User_list, country, year, dummy_days, residu
                     next_travel_ind_range = np.arange(park_ind[park][1], park_ind[park+1][0])
                     len_next_park =  park_ind[park+1][1] - park_ind[park+1][0]
                     if len_next_park < 10:
-                        next_travel_ind_range = np.arange(park_ind[park][1], park_ind[park+2][0])
+                        try:
+                            next_travel_ind_range = np.arange(park_ind[park][1], park_ind[park+2][0])
+                        except IndexError:
+                            pass
                     en_next_travel = abs(np.sum(power[next_travel_ind_range]))                 
                 except IndexError: # If there is an index error means we are in the last parking, special case
                     en_next_travel = 0
@@ -200,6 +203,9 @@ def Charging_Process(Profiles_user, User_list, country, year, dummy_days, residu
                     en_charge_tot = 0
                 else: # Calculating the energy consumed in the following travel   
                     en_charge_tot = (en_next_travel + en_to_charge)/eff
+                
+                if charging_mode == 'Perfect Foresight' and en_charge_tot < 0.1:
+                    continue
                 
                 residual_energy = Battery_cap_Us_min*SOC_park  # Residual energy in the EV Battery
 
@@ -226,7 +232,7 @@ def Charging_Process(Profiles_user, User_list, country, year, dummy_days, residu
                     # In the case of perfect foresight the charging is shifted at the end of the parking, so a special routine is needed
                     if charging_mode == 'Perfect Foresight': 
                         t_ch_nom = min(en_charge_tot / P_ch_nom, t_park) # charging time with nominal power (float)
-                        t_ch_tot = int(- (en_charge_tot // -P_ch_nom)) # Fast way to perform the operation: int(math.ceil(en_charge_tot/P_ch_nom)) 
+                        t_ch_tot = int(- (en_charge_tot // -P_ch_nom)) # Fast way to perform the operation:   int(math.ceil(en_charge_tot/P_ch_nom)) 
                         t_ch = min(t_ch_tot, t_park) # charge until SOC max, if parking time allows                   
                         P_charge = P_ch_nom*t_ch_nom/t_ch #charging for an integer number of minutes at the power equivalent to the one that would charge en_charge_tot without rounding
                         charge_end = park_ind[park][1]
