@@ -174,10 +174,10 @@ def Charging_Process(Profiles_user, User_list, country, year, dummy_days, residu
                 # SOC at the beginning of the parking
                 SOC_park = SOC[park_ind[park][0]]
                 
-                # if SOC_park >= SOC_max:
-                #     continue
-                # else:
-                #     pass
+                if SOC_park >= SOC_max:
+                    continue
+                else:
+                    pass
                 
                 # For the time based charging methods, the index of the parking period is calculated.
                 # In the other cases is set to a dummy variable to avoid interection with "dummy" charge range
