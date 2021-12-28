@@ -57,7 +57,7 @@ def Charging_Process(Profiles_user, User_list, country, year, dummy_days, residu
     # Check that the initial SOC is in the expected way
     if (SOC_initial != 'random' and 
         not isinstance(SOC_initial, (int, float))): 
-            raise ValueError(f"[WARNING] Invalid SOC initial. Expected etiher 'random', or a value between {SOC_min} and 1")                    
+            raise ValueError(f"[WARNING] Invalid SOC initial. Expected either 'random', or a value between {SOC_min} and 1")                    
 
     # Check that the infrastructure probability is in the expected way
     if (infr_prob != 'piecewise' and 
