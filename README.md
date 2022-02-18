@@ -70,7 +70,7 @@ Politecnico di Milano, Italy <br/>
 
 ## Citing
 
-Please cite the under-review Journal publicaton if you use RAMP-mobility in your research:
+Please cite the related Journal publicaton if you use RAMP-mobility in your research:
 *A. Mangipinto, F. Lombardi, F. Sanvito, M. Pavičević, S. Quoilin, E. Colombo, Impact of mass-scale deployment of electric vehicles and benefits of smart charging across all European countries, 2021, [accepted by Applied Energy]*
 
 Additionally, you may cite the EMP-E presentation of RAMP-mobility:
