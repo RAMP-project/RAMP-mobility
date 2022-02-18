@@ -71,7 +71,7 @@ Politecnico di Milano, Italy <br/>
 ## Citing
 
 Please cite the under-review Journal publicaton if you use RAMP-mobility in your research:
-*A. Mangipinto, F. Lombardi, F. Sanvito, M. Pavičević, S. Quoilin, E. Colombo, Impact of mass-scale deployment of electric vehicles and benefits of smart charging across all European countries, 2021, [under review]*
+*A. Mangipinto, F. Lombardi, F. Sanvito, M. Pavičević, S. Quoilin, E. Colombo, Impact of mass-scale deployment of electric vehicles and benefits of smart charging across all European countries, 2021, [accepted by Applied Energy]*
 
 Additionally, you may cite the EMP-E presentation of RAMP-mobility:
 *A. Mangipinto, F. Lombardi, F. Sanvito, S. Quoilin, M. Pavičević, E. Colombo, RAMP-mobility: time series of electric vehicle consumption and charging strategies for all European countries, EMP-E, 2020, https://doi.org/10.13140/RG.2.2.29560.26880*
