@@ -7,9 +7,9 @@
 ## Overview
 RAMP-mobility is an original application of the open-source **[RAMP software engine](https://github.com/RAMP-project/RAMP)**, tailored to the generation of European electric vehicles mobility and charging profiles at high temporal resolution (1-min).
 
-This repository contains the complete RAMP-Mobility model, entirely developed in Python 3.6. The model is currently released as v1.0. It includes a minimum 'quick-start' documentation (see below), complemented by the code being fully commented in each line to allow a complete understanding of it. A more thorougly documented version of the repository is under development and should be released soon, alongside a Journal publication.
+This repository contains the complete RAMP-Mobility model, entirely developed in Python 3.7. The model is currently released as v0.3.1. It includes a minimum 'quick-start' documentation (see below), complemented by the code being fully commented in each line to allow a complete understanding of it. 
 
-In the while, further details about the conceptual and mathematical model formulation of the RAMP software engine can be found in the original RAMP Journal publication (https://doi.org/10.1016/j.energy.2019.04.097). What is more, you are welcome to join our **[Gitter chat](https://gitter.im/RAMP-project/community)** to discuss doubts and make questions about the code!
+Further details about the conceptual and mathematical model formulation of the RAMP software engine can be found in the original RAMP (https://doi.org/10.1016/j.energy.2019.04.097) and in the specific RAMP-mobility (https://doi.org/10.1016/j.apenergy.2022.11867) Journal publications. What is more, you are welcome to join our **[Gitter chat](https://gitter.im/RAMP-project/community)** to discuss doubts and make questions about the code!
 
 <p align="center">
 <img src="https://github.com/RAMP-project/RAMP-mobility/blob/master/docs/example_profiles.jpg" width="1200">
@@ -71,7 +71,7 @@ Politecnico di Milano, Italy <br/>
 ## Citing
 
 Please cite the related Journal publicaton if you use RAMP-mobility in your research:
-*A. Mangipinto, F. Lombardi, F. Sanvito, M. Pavičević, S. Quoilin, E. Colombo, Impact of mass-scale deployment of electric vehicles and benefits of smart charging across all European countries, 2021, [accepted by Applied Energy]*
+*A. Mangipinto, F. Lombardi, F. Sanvito, M. Pavičević, S. Quoilin, E. Colombo, Impact of mass-scale deployment of electric vehicles and benefits of smart charging across all European countries, Applied Enery, 2022, https://doi.org/10.1016/j.apenergy.2022.11867. *
 
 Additionally, you may cite the EMP-E presentation of RAMP-mobility:
 *A. Mangipinto, F. Lombardi, F. Sanvito, S. Quoilin, M. Pavičević, E. Colombo, RAMP-mobility: time series of electric vehicle consumption and charging strategies for all European countries, EMP-E, 2020, https://doi.org/10.13140/RG.2.2.29560.26880*
@@ -84,7 +84,7 @@ This project is open-source. Interested users are therefore invited to test, com
 
 ## License
 
-Copyright 2020 RAMP-Mobility, contributors listed in **Authors**
+Copyright 2022 RAMP-Mobility, contributors listed in **Authors**
 
 Licensed under the European Union Public Licence (EUPL), Version 1.2-or-later; you may not use this file except in compliance with the License. 
 
