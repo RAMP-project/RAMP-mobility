@@ -84,7 +84,7 @@ This project is open-source. Interested users are therefore invited to test, com
 
 ## License
 
-Copyright 2022 RAMP-Mobility, contributors listed in **Authors**
+Copyright 2020 RAMP-Mobility, contributors listed in **Authors**
 
 Licensed under the European Union Public Licence (EUPL), Version 1.2-or-later; you may not use this file except in compliance with the License. 
 
