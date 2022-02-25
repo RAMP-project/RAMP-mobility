@@ -9,7 +9,7 @@ RAMP-mobility is an original application of the open-source **[RAMP software eng
 
 This repository contains the complete RAMP-Mobility model, entirely developed in Python 3.7. The model is currently released as v0.3.1. It includes a minimum 'quick-start' documentation (see below), complemented by the code being fully commented in each line to allow a complete understanding of it. 
 
-Further details about the conceptual and mathematical model formulation of the RAMP software engine can be found in the original RAMP (https://doi.org/10.1016/j.energy.2019.04.097) and in the specific RAMP-mobility (https://doi.org/10.1016/j.apenergy.2022.11867) Journal publications. What is more, you are welcome to join our **[Gitter chat](https://gitter.im/RAMP-project/community)** to discuss doubts and make questions about the code!
+Further details about the conceptual and mathematical model formulation of the RAMP software engine can be found in the original RAMP ([Energy Journal](https://doi.org/10.1016/j.energy.2019.04.097)) and in the specific RAMP-mobility ([Applied Energy Journal](https://doi.org/10.1016/j.apenergy.2022.11867)) publications. What is more, you are welcome to join our **[Gitter chat](https://gitter.im/RAMP-project/community)** to discuss doubts and make questions about the code!
 
 <p align="center">
 <img src="https://github.com/RAMP-project/RAMP-mobility/blob/master/docs/example_profiles.jpg" width="1200">
