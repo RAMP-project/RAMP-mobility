@@ -169,7 +169,7 @@ window['inactive']  = {'main':      [[window_data[country_window]['Start']['Inac
                        'free time': [[window_data[country_window]['Start']['Inactive']['Free time'][1], window_data[country_window]['End']['Inactive']['Free time'][1]],   
                                      [window_data[country_window]['Start']['Inactive']['Free time'][2], window_data[country_window]['End']['Inactive']['Free time'][2]]]}
 
-#Re-format functioning windows to calculare the Percentage of travels in functioning windows 
+#Re-format functioning windows to calculate the Percentage of travels in functioning windows 
 wind_temp = copy.deepcopy(window)
 for key in wind_temp.keys():
     for act in ['main', 'free time']:

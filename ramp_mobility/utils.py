@@ -9,6 +9,7 @@ Created on Tue Sep 15 14:55:52 2020
 import numpy as np
 import pandas as pd
 import pytz
+import math as math
 
 #%% Functions
  
@@ -21,9 +22,35 @@ def charge_prob(SOC):
        
     return p
 
+def connection_prob_log(SOC):
+
+    SOC_k=0.3 # [0,SOC_k] interval in which the probability to plug is 0 
+    shift=10**-2 # always >0
+    intercept= -np.log(shift)
+
+    p = max(0,(np.log(max(0.00001,SOC+shift-SOC_k))+intercept)/(np.log(max(1.0+shift-SOC_k,0))+intercept))
+
+    return p
+
+def connection_prob_dome(SOC):
+    
+    peak_SOC = 0.7
+    steepness = 0.15
+    p_max = 0.3
+
+    p = (math.exp(-(SOC-peak_SOC)**2/(2*steepness**2))) * p_max
+
+    return p
+
+def connection_prob_const(SOC):
+    
+    p = 0
+
+    return p
+
 def charge_prob_const(SOC):        
     
-    p = 1       
+    p = 1  # 1       
     
     return p
 

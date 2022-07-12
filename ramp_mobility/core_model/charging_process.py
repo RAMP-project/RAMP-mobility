@@ -11,6 +11,7 @@ import random
 import pandas as pd
 import datetime as dt
 from ramp_mobility import utils
+import itertools
 import math
 
 # from initialise import (charge_prob, charge_prob_const, SOC_initial_f, 
@@ -19,7 +20,7 @@ import math
 
 #%% Charging process calculation script
 
-def Charging_Process(Profiles_user, User_list, country, year, dummy_days, residual_load, charging_mode = 'Uncontrolled', logistic = False, infr_prob = 0.5, Ch_stations = ([3.7, 11, 120], [0.6, 0.3, 0.1])):
+def Charging_Process(Profiles_user, User_list, country, year, dummy_days, residual_load, charging_mode = 'Uncontrolled', logistic = False, infr_prob = 0.5, Ch_stations = ([3.7, 11, 120], [0.6, 0.3, 0.1]), V2G = False):
     
     #SOC value at the beginning of the simulation, relevant only for
     # Perfect Foresight charging strategy, as is the maximum SOC that the car 
@@ -66,12 +67,24 @@ def Charging_Process(Profiles_user, User_list, country, year, dummy_days, residu
     
     # Initialization of output variables
     Charging_profile_user = {}
+    Charging_nom_profile_user = {}
     Charging_profile = np.zeros(len(Profiles_user['Working - Large car']))
+    Charging_nom_profile = np.zeros(len(Profiles_user['Working - Large car']))
+    Charging_limit_profile = np.zeros(len(Profiles_user['Working - Large car']))
+    Plug_in_profile = np.zeros(len(Profiles_user['Working - Large car']))
+    Plug_in_profile_cap = np.zeros(len(Profiles_user['Working - Large car']))
+    Plug_in_v2g_profile_cap = np.zeros(len(Profiles_user['Working - Large car']))
+    Charging_profile_cap = np.zeros(len(Profiles_user['Working - Large car']))
+
     en_sys_tot = np.zeros(len(Profiles_user['Working - Large car']))
     SOC_user = {}
     plug_in_user = {}
+    plug_in_user_v2g = {}
+    min_charge_user = {}
+    max_charge_user = {}
     num_us = 0
     dummy_minutes = 1440 * dummy_days
+    batt_cap_tot=0
 
     # Creation of date array 
     start_day = dt.datetime(year, 1, 1) - dt.timedelta(days=dummy_days)
@@ -84,6 +97,11 @@ def Charging_Process(Profiles_user, User_list, country, year, dummy_days, residu
     else: # The user will always try to charge (probability = 1 for every SOC)
         ch_prob = utils.charge_prob_const
     
+    if V2G:
+        con_prob = utils.connection_prob_dome
+    else:
+        con_prob = utils.connection_prob_const
+
     # Check which infrastructure probability function to use 
     if infr_prob == 'piecewise': # Use of piecewise function based on hour of the day 
         # Windows for piecewise infrastructure probability
@@ -115,34 +133,43 @@ def Charging_Process(Profiles_user, User_list, country, year, dummy_days, residu
         charge_range_check = utils.charge_check_normal
 
     print('\nPlease wait for the charging profiles...')   
-    
+
     for us_num, Us in enumerate(User_list): # Simulates for each user type
         
         #Initialise lists
         Charging_profile_user[Us.user_name] = []
+        Charging_nom_profile_user[Us.user_name] = []
         SOC_user[Us.user_name] = []
         plug_in_user[Us.user_name] = []
+        plug_in_user_v2g[Us.user_name] = []
+        min_charge_user[Us.user_name] = []
+        max_charge_user[Us.user_name] = []
         
         plug_in_Us = np.zeros((len(Profiles_user[Us.user_name]), Us.num_users), dtype = int) # Initialise plug-in array
-
         # Brings tha values put to 0.001 for the mask to 0
         Profiles_user[Us.user_name] = np.where(Profiles_user[Us.user_name] < 0.1, 0, Profiles_user[Us.user_name]) 
         # Sets to power consumed by the car to negative values
-        power_Us = np.where(Profiles_user[Us.user_name] > 0, -Profiles_user[Us.user_name], 0) 
+        power_Us = np.where(Profiles_user[Us.user_name] > 0, -Profiles_user[Us.user_name], 0) # requested power by the vehicle is negative
         power_Us = power_Us / 1000 #kW
         
         # Users who never take the car in the considered period are skipped
         power_Us = power_Us[:,np.where(power_Us.any(axis=0))[0]] 
         
         Battery_cap_Us_min = Us.App_list[0].Battery_cap * 60 # Capacity multiplied by 60 to evaluate the capacity in kWmin
-        Battery_cap_Us_h = Us.App_list[0].Battery_cap # Capacity multiplied by 60 to evaluate the capacity in kWmin
-        
-        for i in range(power_Us.shape[1]): # Simulates for each single user with at least one travel
+        Battery_cap_Us_h = Us.App_list[0].Battery_cap
+
+        for i in range(power_Us.shape[1]): # Simulates for each single user with at least one travel --> TO BE CHANGED since there is connection also
             
             # Filter power for the specific user            
-            plug_in = plug_in_Us[:,i]
-            power = power_Us[:, i] 
-            
+            plug_in = np.copy(plug_in_Us[:,i])
+            plug_in_cap = np.copy(plug_in_Us[:,i])
+            plug_in_v2g = np.copy(plug_in_Us[:,i])
+
+            power = np.copy(power_Us[:,i]) # charging power
+            power_limit = np.copy(power_Us[:,i]) # max charging/discharging power
+            power_nom = np.copy(power_Us[:,i]) # nominal charging station power
+            discharge_depth = np.copy(power_Us[:,i])
+
             # Variation of SOC for each minute, 
             delta_soc = power / Battery_cap_Us_min 
             
@@ -212,25 +239,28 @@ def Charging_Process(Profiles_user, User_list, country, year, dummy_days, residu
                 # Control to check if the user can charge based on infrastructure 
                 # availability, SOC, time of the day (Depending on the options activated)
                 if (
-                    (ch_prob(SOC_park) > np.random.rand() and
-                    infr_pr[park_ind[park][0]] > np.random.rand() and
-                    charge_range_check(ind_park_range, charge_range)
+                    (ch_prob(SOC_park) > np.random.rand() and                   # user behaviour - charging probability
+                    infr_pr[park_ind[park][0]] > np.random.rand() and           # infrastructure availability
+                    charge_range_check(ind_park_range, charge_range)            # check on charging window
                     ) or 
-                    (np.around(SOC_park, 2) <= SOC_min) or
-                    (np.floor(residual_energy) <= np.ceil(en_next_travel/eff))
+                    (np.around(SOC_park, 2) <= SOC_min) or                      # forced charging if SOC < SOC_min
+                    (np.floor(residual_energy) <= np.ceil(en_next_travel/eff))  # forced charging if residual energy is not enough for next trip
                     ): 
                                         
                     # Calculates the parking time
                     t_park = park_ind[park][1] - park_ind[park][0]                 
-                    
-                    # Fills the array of plug in (1 = plugged, 0 = not plugged)
-                    plug_in[park_ind[park][0]:park_ind[park][1]] = 1
-                    
+                                        
                     # Samples the nominal power of the charging station
-                    P_ch_nom = random.choices(P_ch_station_list, weights=prob_ch_station)[0]                
-                    
+                    P_ch_nom = random.choices(P_ch_station_list, weights=prob_ch_station)[0]
+
+                    # Fills the array of plug in (1 = plugged, 0 = not plugged)
+                    plug_in[park_ind[park][0]:park_ind[park][1]] = 1                
+                    power_limit[park_ind[park][0]:park_ind[park][1]] = min(P_ch_nom, Battery_cap_Us_h*(SOC_max-SOC_min))
+                    power_nom[park_ind[park][0]:park_ind[park][1]] = P_ch_nom  
+                    discharge_depth[park_ind[park][0]:park_ind[park][1]] = SOC_min
+
                     # In the case of perfect foresight the charging is shifted at the end of the parking, so a special routine is needed
-                    if charging_mode == 'Perfect Foresight': 
+                    if charging_mode == 'Perfect Foresight': # C'E' UN PORBLEMA -> SOC >1 manca un controllo !!!!!
                         t_ch_nom = min(en_charge_tot / P_ch_nom, t_park) # charging time with nominal power (float)
                         t_ch_tot = int(- (en_charge_tot // -P_ch_nom)) # Fast way to perform the operation:   int(math.ceil(en_charge_tot/P_ch_nom)) 
                         t_ch = min(t_ch_tot, t_park) # charge until SOC max, if parking time allows                   
@@ -250,35 +280,82 @@ def Charging_Process(Profiles_user, User_list, country, year, dummy_days, residu
                             # if intersection array is empty means that we are in forced charging 
                             # (SOC<0.2 / too low SOC residual), or in uncontrolled charging mode
                             except (FloatingPointError, ZeroDivisionError): 
-                                t_ch_nom = min(en_charge_tot / P_ch_nom, t_park) # charging time with nominal power (float)
+                                t_ch_nom = min(en_charge_tot / P_ch_nom, t_park) # charging time with nominal power (float) [min]
                                 t_ch_tot = int(- (en_charge_tot // -P_ch_nom)) # Fast way to perform the operation: int(math.ceil(en_charge_tot/P_ch_nom)) 
                                 t_ch = min(t_ch_tot, t_park) # charge until SOC max, if parking time allows                   
                                 P_charge = P_ch_nom*t_ch_nom/t_ch #charging for an integer number of minutes at the power equivalent to the one that would charge en_charge_tot without rounding
                                 charge_start = park_ind[park][0]
                                 charge_end = charge_start + t_ch
                                 power[charge_start: charge_end] = P_charge
-                                                
-                    delta_soc = power / Battery_cap_Us_min 
+                                                  
+                    delta_soc = power / Battery_cap_Us_min # charged power transleted into SOC increase [-]         
                     SOC = delta_soc
                     SOC[0] = SOC_init
                     SOC = np.cumsum(SOC)
                 
                 else: # if the user does not charge, then the energy consumed will be charged in a following parking                         
-                    en_to_charge = en_charge_tot                        
-            
-            charging_power = np.where(power<0, 0, power) # Filtering only for the charging power 
-            
+                    en_to_charge = en_charge_tot
+
+                    # Connection to the grid driven by V2G
+                    if (
+                    con_prob(SOC_park) > np.random.rand() and                   # V2G connection probability
+                    infr_pr[park_ind[park][0]] > np.random.rand() and           # infrastructure availability
+                    charge_range_check(ind_park_range, charge_range)            # check on charging window
+                    ):
+                        plug_in_v2g[park_ind[park][0]:park_ind[park][1]] = 1
+                        P_ch_nom = random.choices(P_ch_station_list, weights=prob_ch_station)[0]
+                        
+                        power_nom[park_ind[park][0]:park_ind[park][1]] = P_ch_nom
+                        power_limit[park_ind[park][0]:park_ind[park][1]] = min(P_ch_nom, Battery_cap_Us_h*(SOC_max-SOC_min)) # The maximum theoretical charge limit is set by the minimum between the available battery capacity and the charging power         
+                        discharge_depth[park_ind[park][0]:park_ind[park][1]] = SOC_min
+                try:
+                    discharge_depth[park_ind[park][1]] = en_next_travel / Battery_cap_Us_min + SOC_min
+                except IndexError: # If there is an index error means we are in the last parking, special case
+                    discharge_depth[park_ind[park][0]] = en_next_travel / Battery_cap_Us_min + SOC_min
+
+            charging_limit_power = np.where(power_nom<0, 0, power_limit) # Filtering only the nominal charging power
+            charging_nom_power = np.where(power_nom<0, 0, power_nom) # Filtering only the nominal charging power 
+            charging_power = np.where(power<0, 0, power) # Filtering only the charging power 
+            charging_cap = np.where(charging_power >= 0.00001, 1, 0) # 1 is placed when the vehicle is charging
+            min_charge_en = np.where(discharge_depth < 0, 0, discharge_depth)
+            min_charge_en = np.where(min_charge_en == 0, SOC_min, min_charge_en)
+            max_charge_en = np.where(charging_nom_power>0, SOC_max, min_charge_en)
+
             # SOC_user[Us.user_name].append(SOC)
             # Charging_profile_user[Us.user_name].append(power_pos)
             # plug_in_user[Us.user_name].append(plug_in)
+            # plug_in_user_v2g[Us.user_name].append(plug_in_v2g)
             
-            Charging_profile = Charging_profile + charging_power
-#            SOC_user[Us.user_name].append(SOC)
-#            Charging_profile_user[Us.user_name].append(charging_power)
-#            plug_in_f = plug_in[dummy_minutes:-dummy_minutes]
-#            plug_in_user[Us.user_name].append(plug_in_f)
+            Charging_profile = Charging_profile + charging_nom_power
+            
+            Charging_limit_profile = Charging_limit_profile + charging_limit_power
+            Charging_nom_profile = Charging_nom_profile + charging_nom_power
+            Plug_in_profile = Plug_in_profile + plug_in + plug_in_v2g
+            Plug_in_profile_cap = Plug_in_profile_cap + (plug_in) * Battery_cap_Us_h * SOC_max    # plugged-in total capacities [kWh]
+            Plug_in_v2g_profile_cap = Plug_in_v2g_profile_cap + plug_in_v2g * Battery_cap_Us_h    # plugged-in total capacities [kWh] due to V2G purposes
+            Charging_profile_cap = Charging_profile_cap + charging_cap * Battery_cap_Us_h         # In-charging total capacities [kWh]
 
-            ### Calculate the part of battery capacity available to the TSO for V2G option (deativated)
+
+            SOC_f=SOC[dummy_minutes:-dummy_minutes]
+            charging_power_f=charging_power[dummy_minutes:-dummy_minutes]
+            charging_nom_power_f=charging_nom_power[dummy_minutes:-dummy_minutes]
+            plug_in_f = plug_in[dummy_minutes:-dummy_minutes]
+            plug_in_v2g_f = plug_in_v2g[dummy_minutes:-dummy_minutes]
+            min_charge_en_f = min_charge_en[dummy_minutes:-dummy_minutes]
+            max_charge_en_f = max_charge_en[dummy_minutes:-dummy_minutes]
+
+            # print(plug_in_v2g)
+            plug_in_user[Us.user_name].append(plug_in_f)
+            plug_in_user_v2g[Us.user_name].append(plug_in_v2g_f)
+            Charging_profile_user[Us.user_name].append(charging_power_f)
+            Charging_nom_profile_user[Us.user_name].append(charging_nom_power_f)
+            SOC_user[Us.user_name].append(SOC_f)
+            min_charge_user[Us.user_name].append(min_charge_en_f)
+            max_charge_user[Us.user_name].append(max_charge_en_f)
+
+            batt_cap_tot=batt_cap_tot+Battery_cap_Us_h
+
+            ### Calculate the part of battery capacity available to the TSO for V2G option (deactivated)
             # if charging_mode == 'Perfect Foresight':
             #     en_system = (Battery_cap_Us_min - charging_power) * plug_in
             #     en_sys_tot = en_sys_tot + en_system
@@ -287,22 +364,32 @@ def Charging_Process(Profiles_user, User_list, country, year, dummy_days, residu
                 continue
             else: 
                 SOC_user[Us.user_name].append(SOC)
-                Charging_profile_user[Us.user_name].append(charging_power)
-#                plug_in_user[Us.user_name].append(plug_in_f)
+                # Charging_profile_user[Us.user_name].append(charging_power)
+                # plug_in_user[Us.user_name].append(plug_in_f)
+                # plug_in_user_v2g[Us.user_name].append(plug_in_v2g_f)
 
                 neg_soc_ind = np.where(SOC < 0)[0]
                 neg_soc_ind = np.split(neg_soc_ind, np.where(np.diff(neg_soc_ind) != 1)[0]+1)
-                neg_soc_ind = [[ind[0],ind[-1]+1] for ind in neg_soc_ind] #list of array of index of when there is a mobility travel
+                neg_soc_ind = [[ind[0],ind[-1]+1] for ind in neg_soc_ind] # list of array of index of when there is a mobility travel
                 print(f"[WARNING: Charging process User {i + 1} ({Us.user_name}) not properly constructed, SOC < 0 in time {neg_soc_ind}]") 
                 # SOC_user[Us.user_name].append(SOC)
                 # Charging_profile_user[Us.user_name].append(power_pos)
                 # plug_in_user[Us.user_name].append(plug_in)
-
+       
         num_us = num_us + Us.num_users
         print(f'Charging Profile of "{Us.user_name}" user completed ({num_us}/{tot_users})') #screen update about progress of computation
     
     Charging_profile = Charging_profile[dummy_minutes:-dummy_minutes]
+    Charging_nom_profile = Charging_nom_profile[dummy_minutes:-dummy_minutes]
+    Plug_in_profile = Plug_in_profile[dummy_minutes:-dummy_minutes]
+    Plug_in_profile_cap = Plug_in_profile_cap[dummy_minutes:-dummy_minutes]/batt_cap_tot
+    Plug_in_v2g_profile_cap = Plug_in_v2g_profile_cap[dummy_minutes:-dummy_minutes]/batt_cap_tot
+    Charging_profile_cap = Charging_profile_cap[dummy_minutes:-dummy_minutes]/batt_cap_tot
+    Charging_limit_profile = Charging_limit_profile[dummy_minutes:-dummy_minutes]
+
+    # Charging_profile_user=dict(itertools.islice(Charging_profile_user.items(), dummy_days, n_periods/1440 - dummy_days))
     # en_sys_tot = en_sys_tot[dummy_minutes:-dummy_minutes]
     
-    return (Charging_profile, Charging_profile_user, SOC_user)
+    return (Charging_profile, Charging_profile_user, SOC_user, Plug_in_profile_cap, plug_in_user, Charging_profile_cap,
+     Plug_in_v2g_profile_cap, plug_in_user_v2g, Plug_in_profile, Charging_nom_profile_user, Charging_limit_profile, min_charge_user, max_charge_user, Charging_nom_profile)
 
