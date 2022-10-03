@@ -106,7 +106,7 @@ for c in countries:
     Usage_utc = pp.Time_correction(Usage_df, country, year)    
     
     # By default, profiles and usage are plotted as a DataFrame
-    pp.Profile_df_plot(Profiles_df, start = '01-01 00:00:00', end = '12-31 23:59:00', year = year, country = country)
+    pp.Profile_df_plot(Profiles_utc, start = '01-01 00:00:00', end = '12-31 23:59:00', year = year, country = country)
     pp.Usage_df_plot(Usage_utc, start = '01-01 00:00:00', end = '12-31 23:59:00', year = year, country = country, User_list = User_list)
     
     # Add temperature correction to the Power Profiles 
