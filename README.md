@@ -7,9 +7,9 @@
 ## Overview
 RAMP-mobility is an original application of the open-source **[RAMP software engine](https://github.com/RAMP-project/RAMP)**, tailored to the generation of European electric vehicles mobility and charging profiles at high temporal resolution (1-min).
 
-This repository contains the complete RAMP-Mobility model, entirely developed in Python 3.6. The model is currently released as v1.0. It includes a minimum 'quick-start' documentation (see below), complemented by the code being fully commented in each line to allow a complete understanding of it. A more thorougly documented version of the repository is under development and should be released soon, alongside a Journal publication.
+This repository contains the complete RAMP-Mobility model, entirely developed in Python 3.7. The model is currently released as v0.3.1. It includes a minimum 'quick-start' documentation (see below), complemented by the code being fully commented in each line to allow a complete understanding of it. 
 
-In the while, further details about the conceptual and mathematical model formulation of the RAMP software engine can be found in the original RAMP Journal publication (https://doi.org/10.1016/j.energy.2019.04.097). What is more, you are welcome to join our **[Gitter chat](https://gitter.im/RAMP-project/community)** to discuss doubts and make questions about the code!
+Further details about the conceptual and mathematical model formulation of the RAMP software engine can be found in the original [RAMP](https://doi.org/10.1016/j.energy.2019.04.097) and in the specific [RAMP-mobility](https://doi.org/10.1016/j.apenergy.2022.118676) publications. What is more, you are welcome to join our **[Gitter chat](https://gitter.im/RAMP-project/community)** to discuss doubts and make questions about the code!
 
 <p align="center">
 <img src="https://github.com/RAMP-project/RAMP-mobility/blob/master/docs/example_profiles.jpg" width="1200">
@@ -70,11 +70,14 @@ Politecnico di Milano, Italy <br/>
 
 ## Citing
 
-Please cite the original Journal publication if you use RAMP in your research:
-*F. Lombardi, S. Balderrama, S. Quoilin, E. Colombo, Generating high-resolution multi-energy load profiles for remote areas with an open-source stochastic model, Energy, 2019, https://doi.org/10.1016/j.energy.2019.04.097.*
+Please cite the related Journal publicaton if you use RAMP-mobility in your research:
+*A. Mangipinto, F. Lombardi, F. Sanvito, M. Pavičević, S. Quoilin, E. Colombo, Impact of mass-scale deployment of electric vehicles and benefits of smart charging across all European countries, Applied Enery, 2022, https://doi.org/10.1016/j.apenergy.2022.118676. *
 
 Additionally, you may cite the EMP-E presentation of RAMP-mobility:
 *A. Mangipinto, F. Lombardi, F. Sanvito, S. Quoilin, M. Pavičević, E. Colombo, RAMP-mobility: time series of electric vehicle consumption and charging strategies for all European countries, EMP-E, 2020, https://doi.org/10.13140/RG.2.2.29560.26880*
+
+Or the publication of the original RAMP software engine:
+*F. Lombardi, S. Balderrama, S. Quoilin, E. Colombo, Generating high-resolution multi-energy load profiles for remote areas with an open-source stochastic model, Energy, 2019, https://doi.org/10.1016/j.energy.2019.04.097.*
 
 ## Contribute
 This project is open-source. Interested users are therefore invited to test, comment or contribute to the tool. Submitting issues is the best way to get in touch with the development team, which will address your comment, question, or development request in the best possible way. We are also looking for contributors to the main code, willing to contibute to its capabilities, computational-efficiency, formulation, etc. 
