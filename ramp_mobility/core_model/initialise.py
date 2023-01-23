@@ -38,7 +38,7 @@ def yearly_pattern(country, year):
                  'Thursday' : [2, 3], 
                  'Friday'   : [1, 2], 
                  'Saturday' : [0, 1], 
-                 'Sunday'   : [0, 6]}
+                 'Sunday'   : [6, 0]}
       
     for d in dict_year.keys():
         if first_day == d:
