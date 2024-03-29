@@ -71,11 +71,11 @@ for c in countries:
     Ch_stations = ([3.7, 11, 120], [0.6, 0.3, 0.1]) # Define nominal power of charging stations and their probability 
     
     #inputfile for the temperature data: 
-    inputfile_temp = "../database/temp_ninja_pop_1980-2019.csv"
+    inputfile_temp = os.path.join("..", "database", "temp_ninja_pop_1980-2019.csv")
     
     ## If simulating the RES Integration charging strategy, a file with the residual load curve should be included in the folder
     try:
-        inputfile_residual_load = f"../database/residual_load/residual_load_{c}.csv"
+        inputfile_residual_load = os.path.join("..", "database", "residual_load", f"residual_load_{c}.csv")
         residual_load = pd.read_csv(inputfile_residual_load, index_col = 0)
     except FileNotFoundError:      
         residual_load = pd.DataFrame(0, index=range(1), columns=range(1))
