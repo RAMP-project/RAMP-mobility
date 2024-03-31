@@ -70,7 +70,7 @@ Politecnico di Milano, Italy <br/>
 
 ## Citing
 
-Please cite the related Journal publicaton if you use RAMP-mobility in your research:
+Please cite the related Journal publication if you use RAMP-mobility in your research:
 *A. Mangipinto, F. Lombardi, F. Sanvito, M. Pavičević, S. Quoilin, E. Colombo, Impact of mass-scale deployment of electric vehicles and benefits of smart charging across all European countries, Applied Enery, 2022, https://doi.org/10.1016/j.apenergy.2022.118676. *
 
 Additionally, you may cite the EMP-E presentation of RAMP-mobility:
@@ -80,7 +80,7 @@ Or the publication of the original RAMP software engine:
 *F. Lombardi, S. Balderrama, S. Quoilin, E. Colombo, Generating high-resolution multi-energy load profiles for remote areas with an open-source stochastic model, Energy, 2019, https://doi.org/10.1016/j.energy.2019.04.097.*
 
 ## Contribute
-This project is open-source. Interested users are therefore invited to test, comment or contribute to the tool. Submitting issues is the best way to get in touch with the development team, which will address your comment, question, or development request in the best possible way. We are also looking for contributors to the main code, willing to contibute to its capabilities, computational-efficiency, formulation, etc. 
+This project is open-source. Interested users are therefore invited to test, comment or contribute to the tool. Submitting issues is the best way to get in touch with the development team, which will address your comment, question, or development request in the best possible way. We are also looking for contributors to the main code, willing to contribute to its capabilities, computational-efficiency, formulation, etc. 
 
 ## License
 
