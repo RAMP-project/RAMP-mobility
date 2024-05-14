@@ -74,11 +74,11 @@ for c in countries:
     V2G = True # Mode for which the probability to get connected is evaluated for V2G purposes and not only charging
 
     #inputfile for the temperature data: 
-    inputfile_temp = r"..\database\temp_ninja_pop_1980-2019.csv"
+    inputfile_temp = os.path.join("..", "database", "temp_ninja_pop_1980-2019.csv")
     
     ## If simulating the RES Integration charging strategy, a file with the residual load curve should be included in the folder
     try:
-        inputfile_residual_load = fr"..\database\residual_load\residual_load_{c}.csv"
+        inputfile_residual_load = os.path.join("..", "database", "residual_load", f"residual_load_{c}.csv")
         residual_load = pd.read_csv(inputfile_residual_load, index_col = 0)
     except FileNotFoundError:      
         residual_load = pd.DataFrame(0, index=range(1), columns=range(1))
